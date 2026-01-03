@@ -18,7 +18,8 @@ body {
 .campaign-text {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 500;      /* Medium */
+  font-weight: 500;
+  /* Medium */
   line-height: 1.4;
 }
 
@@ -46,7 +47,7 @@ body {
   HERO（SP base / 320〜375対応）※これ1セットだけ残す
 ========================= */
 
-.hero{
+.hero {
   position: relative;
   overflow: hidden;
 
@@ -55,13 +56,13 @@ body {
 }
 
 /* 背景 */
-.hero-bg{
+.hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.hero-bg img{
+.hero-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -70,8 +71,9 @@ body {
 }
 
 /* FVの基準（absoluteの基準はここ！） */
-.hero-inner{
-  position: relative;   /* ✅ ここが基準 */
+.hero-inner {
+  position: relative;
+  /* ✅ ここが基準 */
   z-index: 1;
   min-height: inherit;
   margin: 0 auto;
@@ -81,32 +83,33 @@ body {
 
 /* 通常要素 */
 .hero-label,
-.hero-main{
+.hero-main {
   position: relative;
   z-index: 5;
 }
 
 /* hero-mainは grid だけ（positionは持たせない） */
-.hero-main{
+.hero-main {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
   align-items: start;
   padding: 0 4px;
 
-  position: static;     /* ✅ ここ重要：absolute基準にしない */
+  position: static;
+  /* ✅ ここ重要：absolute基準にしない */
 }
 
 /* 固定要素（absolute）→ hero-inner基準になる */
 .hero-badges,
 .hero-campaign,
-.hero-brand{
+.hero-brand {
   position: absolute;
   z-index: 20;
 }
 
 /* 上ラベル */
-.hero-label{
+.hero-label {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -118,7 +121,7 @@ body {
   padding: 5px 10px;
 }
 
-.hero-label-text{
+.hero-label-text {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 500;
@@ -130,7 +133,7 @@ body {
 }
 
 /* タイトル */
-.hero-title{
+.hero-title {
   margin: 0 0 12px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
@@ -148,7 +151,7 @@ body {
 }
 
 /* 人物枠 */
-.hero-visual{
+.hero-visual {
   position: relative;
   margin: 0;
   display: flex;
@@ -158,7 +161,7 @@ body {
 }
 
 /* 人物画像（A/B補間） */
-.hero-image{
+.hero-image {
   display: block;
   width: 100%;
   max-width: 275px;
@@ -168,31 +171,31 @@ body {
   opacity: 1;
   transition: opacity 1.4s ease-in-out;
 
-  filter: drop-shadow(0 18px 22px rgba(0,0,0,.22));
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .22));
 
   --ty-a: calc(-310px + (-240px - -310px) * var(--t));
   --tx-a: 14px;
-  --s-a:  calc(0.82 + (1 - 0.82) * var(--t));
+  --s-a: calc(0.82 + (1 - 0.82) * var(--t));
 
   --ty-b: calc(-320px + (-250px - -320px) * var(--t));
   --tx-b: -2px;
-  --s-b:  calc(0.76 + (0.92 - 0.76) * var(--t));
+  --s-b: calc(0.76 + (0.92 - 0.76) * var(--t));
 }
 
-.hero-image:not(.is-b){
+.hero-image:not(.is-b) {
   transform: translateY(var(--ty-a)) translateX(var(--tx-a)) scale(var(--s-a));
 }
 
-.hero-image.is-b{
+.hero-image.is-b {
   transform: translateY(var(--ty-b)) translateX(var(--tx-b)) scale(var(--s-b));
 }
 
-.hero-image.is-fading{
+.hero-image.is-fading {
   opacity: 0;
 }
 
 /* 左バッジ */
-.hero-badges{
+.hero-badges {
   left: 6px;
   display: flex;
   flex-direction: column;
@@ -205,7 +208,7 @@ body {
 }
 
 /* 右下キャンペーン */
-.hero-campaign{
+.hero-campaign {
   right: -14px;
   width: 132px;
   height: 126px;
@@ -219,7 +222,7 @@ body {
 
   padding-top: 6px;
   box-sizing: border-box;
-  text-shadow: 0 2px 6px rgba(0,0,0,.35);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .35);
 
   --note-y: -9px;
   --label-y: -8px;
@@ -229,7 +232,7 @@ body {
   bottom: calc(300px + (260px - 300px) * var(--t));
 }
 
-.hero-campaign p{
+.hero-campaign p {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 500;
@@ -238,20 +241,20 @@ body {
 }
 
 /* ブランド */
-.hero-brand{
+.hero-brand {
   right: 6px;
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: .08em;
-  color: rgba(28,36,48,.75);
+  color: rgba(28, 36, 48, .75);
 
   bottom: calc(295px + (257px - 295px) * var(--t));
 }
 
 /* SEO用：画面には見せないが読み上げ・検索には残す */
-.sr-only{
+.sr-only {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -275,33 +278,34 @@ body {
   BENEFIT
 ========================= */
 
-:root{
+:root {
   --benefit-bg: #F3F5F7;
-  --zabuton: rgba(251, 251, 251, 0.8); /* #FBFBFB 80% */
+  --zabuton: rgba(251, 251, 251, 0.8);
+  /* #FBFBFB 80% */
   --point: #E3C46B;
   --heading: #1C2430;
   --text: #575757;
 }
 
 /* セクション全体 */
-.benefit{
+.benefit {
   background: var(--benefit-bg);
   padding: 56px 16px;
 }
 
-.benefit-inner{
+.benefit-inner {
   max-width: 1100px;
   margin: 0 auto;
 }
 
 /* 一覧 */
-.benefit-grid{
+.benefit-grid {
   display: grid;
   gap: 22px;
 }
 
 /* カード */
-.benefit-card{
+.benefit-card {
   display: grid;
   gap: 10px;
 }
@@ -310,13 +314,13 @@ body {
   MEDIA（画像）
 ========================= */
 
-.benefit-media{
+.benefit-media {
   position: relative;
   margin: 0;
   overflow: hidden;
 }
 
-.benefit-media img{
+.benefit-media img {
   display: block;
   width: 100%;
   height: auto;
@@ -326,7 +330,7 @@ body {
   CAPTION（画像上テキスト）
 ========================= */
 
-.benefit-caption{
+.benefit-caption {
   position: absolute;
   top: 54px;
   left: 50%;
@@ -343,7 +347,7 @@ body {
 }
 
 /* POINTラベル */
-.benefit-badge{
+.benefit-badge {
   margin: 0;
   padding: 1px 6px 2px;
   display: inline-block;
@@ -359,7 +363,7 @@ body {
 }
 
 /* 見出し */
-.benefit-heading{
+.benefit-heading {
   margin: 0;
   color: var(--heading);
 
@@ -371,7 +375,7 @@ body {
 }
 
 /* 見出し行ごとの座布団 */
-.benefit-heading-line{
+.benefit-heading-line {
   display: inline-block;
   padding: 1px 6px 2px;
   background: var(--zabuton);
@@ -382,19 +386,19 @@ body {
 ========================= */
 
 /* 枠を固定してトリミング */
-.benefit-card-02 .benefit-media{
+.benefit-card-02 .benefit-media {
   height: 480px;
 }
 
 /* 画像位置：右基準で表示 */
-.benefit-card-02 .benefit-media img{
+.benefit-card-02 .benefit-media img {
   height: 100%;
   object-fit: cover;
   object-position: 100% 50%;
 }
 
 /* 見出しを2行で安定 */
-.benefit-card-02 .benefit-heading-line{
+.benefit-card-02 .benefit-heading-line {
   white-space: nowrap;
 }
 
@@ -520,19 +524,19 @@ body {
 ========================= */
 
 /* セクション土台 */
-.early-bird-bonus{
+.early-bird-bonus {
   font-family: "Noto Sans JP", sans-serif;
   background: #1C2430;
   padding: 0 16px 18px;
 }
 
-.early-bird-inner{
+.early-bird-inner {
   max-width: 360px;
   margin: 0 auto;
 }
 
 /* ---------- Header（全幅） ---------- */
-.early-bird-header{
+.early-bird-header {
   background: #008C8C;
   text-align: center;
 
@@ -546,7 +550,7 @@ body {
 }
 
 /* Header下のネイビー帯（外に出す） */
-.early-bird-header::after{
+.early-bird-header::after {
   content: "";
   position: absolute;
   left: 0;
@@ -557,7 +561,7 @@ body {
 }
 
 /* Hang&Sit Chair（Bold 24px） */
-.early-bird-brand{
+.early-bird-brand {
   margin: 0 0 4px;
   font-size: 24px;
   font-weight: 700;
@@ -566,7 +570,7 @@ body {
 }
 
 /* Early Bird Campaign（Bold 30px） */
-.early-bird-title{
+.early-bird-title {
   margin: 0;
   font-size: 30px;
   font-weight: 700;
@@ -576,7 +580,7 @@ body {
 }
 
 /* ---------- Lead（グレー＋ゴールド） ---------- */
-.early-bird-lead{
+.early-bird-lead {
   margin: 0;
   text-align: center;
   background: transparent;
@@ -584,7 +588,7 @@ body {
 }
 
 /* 期間中〜（Regular 18px）薄グレー：全幅＆左右余白なし */
-.early-bird-lead-top{
+.early-bird-lead-top {
   display: block;
   background: #F3F5F7;
   box-sizing: border-box;
@@ -599,14 +603,16 @@ body {
   color: #1C2430;
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.25;        /* 1行表示を締める */
-  letter-spacing: -0.05em;  /* 文字詰め */
+  line-height: 1.25;
+  /* 1行表示を締める */
+  letter-spacing: -0.05em;
+  /* 文字詰め */
   text-align: center;
   white-space: nowrap;
 }
 
 /* 今だけの〜（Regular 18px / 中だけ少しインセット） */
-.early-bird-highlight{
+.early-bird-highlight {
   display: block;
   background: #E3C46B;
   box-sizing: border-box;
@@ -624,7 +630,7 @@ body {
 }
 
 /* “先行3大特典”（22px / Bold） */
-.early-bird-strong{
+.early-bird-strong {
   display: inline-block;
   font-size: 22px;
   font-weight: 700;
@@ -633,7 +639,7 @@ body {
 }
 
 /* ---------- 特典リスト（ほぼ全幅 + ネイビー見せ） ---------- */
-.early-bird-list{
+.early-bird-list {
   list-style: none;
 
   /* 左右8pxだけネイビーを見せる */
@@ -647,17 +653,17 @@ body {
   padding: 12px 8px;
 }
 
-.early-bird-item{
+.early-bird-item {
   background: none;
   padding: 0;
 }
 
-.early-bird-item + .early-bird-item{
+.early-bird-item+.early-bird-item {
   margin-top: 14px;
 }
 
 /* タイトル（Bold 18px） */
-.early-bird-item-title{
+.early-bird-item-title {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
@@ -666,7 +672,7 @@ body {
 }
 
 /* 説明（Light 14px） */
-.early-bird-item-desc{
+.early-bird-item-desc {
   margin: 6px 0 0;
   font-size: 14px;
   font-weight: 300;
@@ -677,12 +683,12 @@ body {
 }
 
 /* ゴールド内の2行目（必要ならブロックで改行） */
-.early-bird-highlight-break{
+.early-bird-highlight-break {
   display: block;
 }
 
 /* 特典Cの途中で見やすく改行（必要なら） */
-.early-bird-desc-break{
+.early-bird-desc-break {
   display: block;
 }
 
@@ -785,23 +791,24 @@ body {
 ========================= */
 
 /* Section */
-.user-voice{
+.user-voice {
   padding: 22px 0 26px;
   background: transparent;
 }
 
 /* Panel（中央固定 / 背景だけ左右に伸ばす） */
-.user-voice-inner{
+.user-voice-inner {
   position: relative;
   width: min(86vw, 320px);
   margin: 0 auto;
   box-sizing: border-box;
-  background: transparent; /* 背景は ::before に任せる */
+  background: transparent;
+  /* 背景は ::before に任せる */
   padding: 34px 14px 18px;
 }
 
 /* 背景（薄水色）だけ左右に拡張 */
-.user-voice-inner::before{
+.user-voice-inner::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -812,13 +819,13 @@ body {
 }
 
 /* 中身を前面に */
-.user-voice-inner > *{
+.user-voice-inner>* {
   position: relative;
   z-index: 1;
 }
 
 /* Title（半分乗せ） */
-.user-voice-title{
+.user-voice-title {
   position: absolute;
   top: 0;
   left: 50%;
@@ -841,19 +848,19 @@ body {
 }
 
 /* List */
-.user-voice-list{
+.user-voice-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.user-voice-item{
+.user-voice-item {
   position: relative;
   padding: 14px 0;
 }
 
 /* Divider（#1C2430を0.5pxっぽく） */
-.user-voice-divider{
+.user-voice-divider {
   height: 1px;
   margin: 0;
   background: #1C2430;
@@ -865,31 +872,37 @@ body {
   Head（Icon + Lead）
 ========================= */
 
-.user-voice-head{
+.user-voice-head {
   position: relative;
   display: flex;
   align-items: flex-start;
-  min-height: 72px; /* アイコン分の居場所 */
+  min-height: 72px;
+  /* アイコン分の居場所 */
 }
 
 /* Icon */
-.user-voice-icon{
+.user-voice-icon {
   position: absolute;
   top: 2px;
   width: 60px;
 }
 
-.user-voice-head.is-left .user-voice-icon{ left: 26px; }
-.user-voice-head.is-right .user-voice-icon{ right: 26px; }
+.user-voice-head.is-left .user-voice-icon {
+  left: 26px;
+}
 
-.user-voice-icon img{
+.user-voice-head.is-right .user-voice-icon {
+  right: 26px;
+}
+
+.user-voice-icon img {
   width: 100%;
   height: auto;
   display: block;
 }
 
 /* Lead（金） */
-.user-voice-lead{
+.user-voice-lead {
   margin: 0;
   max-width: 170px;
 
@@ -901,19 +914,23 @@ body {
 }
 
 /* Left icon：Leadを本文右端に合わせる */
-.user-voice-head.is-left .user-voice-lead{
+.user-voice-head.is-left .user-voice-lead {
   margin-left: auto;
   text-align: left;
-  padding-left: 80px;  /* icon(60) + 余白 */
-  padding-right: 18px; /* 本文の右余白と面合わせ */
+  padding-left: 80px;
+  /* icon(60) + 余白 */
+  padding-right: 18px;
+  /* 本文の右余白と面合わせ */
 }
 
 /* Right icon：Leadを本文左端に合わせる */
-.user-voice-head.is-right .user-voice-lead{
+.user-voice-head.is-right .user-voice-lead {
   margin-right: auto;
-  margin-left: 18px;   /* 本文の左余白と面合わせ */
+  margin-left: 18px;
+  /* 本文の左余白と面合わせ */
   text-align: left;
-  padding-right: 80px; /* icon(60) + 余白 */
+  padding-right: 80px;
+  /* icon(60) + 余白 */
   padding-left: 0;
 }
 
@@ -921,7 +938,7 @@ body {
   Body（Navy）
 ========================= */
 
-.user-voice-body{
+.user-voice-body {
   margin: 2px 0 0;
 
   font-family: "Noto Sans JP", sans-serif;
@@ -930,7 +947,8 @@ body {
   line-height: 1.25;
   color: #1C2430;
 
-  padding: 0 18px; /* 本文幅の基準 */
+  padding: 0 18px;
+  /* 本文幅の基準 */
 }
 
 
@@ -938,19 +956,20 @@ body {
   FAQ（SP）FINAL
 ========================= */
 
-.faq{
+.faq {
   background: #F8F2DF;
   padding: 24px 0 40px;
 }
 
-.faq-inner{
+.faq-inner {
   width: min(92vw, 360px);
   margin: 0 auto;
 }
 
 /* 見出し（座布団） */
-.faq-title{
-  margin: 0 0 22px;          /* タイトル下の余白（無ければ追加推奨） */
+.faq-title {
+  margin: 0 0 22px;
+  /* タイトル下の余白（無ければ追加推奨） */
   padding: 2px 0;
   background: #1C2430;
   color: #FBFBFB;
@@ -963,24 +982,27 @@ body {
 }
 
 /* リスト外側の左右余白（タイトルはそのまま全幅） */
-.faq-list{
+.faq-list {
   margin: 0;
   padding: 0 32px;
 }
 
 /* 1問セット */
-.faq-item{
+.faq-item {
   display: grid;
-  row-gap: 10px;      /* QとAの間 */
-  margin-bottom: 24px;/* A→次のQまで */
+  row-gap: 10px;
+  /* QとAの間 */
+  margin-bottom: 24px;
+  /* A→次のQまで */
 }
 
 /* Q/A 行共通（バッジだけ四角） */
 .faq-q,
-.faq-a{
+.faq-a {
   margin: 0;
   display: grid;
-  grid-template-columns: 32px 1fr; /* バッジサイズに連動 */
+  grid-template-columns: 32px 1fr;
+  /* バッジサイズに連動 */
   column-gap: 10px;
   align-items: start;
   letter-spacing: -0.02em;
@@ -991,19 +1013,21 @@ body {
 }
 
 /* Qテキスト */
-.faq-q{
-  font-weight: 400; /* Regular */
+.faq-q {
+  font-weight: 400;
+  /* Regular */
   line-height: 1.6;
 }
 
 /* Aテキスト */
-.faq-a{
-  font-weight: 300; /* Light */
+.faq-a {
+  font-weight: 300;
+  /* Light */
   line-height: 1.25;
 }
 
 /* Q/A バッジ（ここだけ四角） */
-.faq-badge{
+.faq-badge {
   width: 32px;
   height: 32px;
   display: grid;
@@ -1013,13 +1037,19 @@ body {
   color: #FBFBFB;
 
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 500; /* Medium */
+  font-weight: 500;
+  /* Medium */
   font-size: 22px;
   line-height: 1;
 }
 
-.faq-badge--q{ background: #1C2430; }
-.faq-badge--a{ background: #E3C46B; }
+.faq-badge--q {
+  background: #1C2430;
+}
+
+.faq-badge--a {
+  background: #E3C46B;
+}
 
 /* 最後だけ余白を消したい時（任意） */
 /* .faq-item:last-child{ margin-bottom: 0; } */
@@ -1029,18 +1059,18 @@ body {
   SP：SIZE & SPEC（spaces）
 ========================= */
 
-.spaces{
+.spaces {
   padding: 22px 0 26px;
   background: transparent;
 }
 
-.spaces-inner{
+.spaces-inner {
   width: min(86vw, 340px);
   margin: 0 auto;
 }
 
 /* タイトル（faq-title と同一） */
-.spaces-title{
+.spaces-title {
   margin: 0 0 22px;
   padding: 2px 0;
   background: #1C2430;
@@ -1054,18 +1084,18 @@ body {
 }
 
 /* サイズ図 */
-.spaces-visual{
+.spaces-visual {
   margin: 0 0 14px;
 }
 
-.spaces-visual img{
+.spaces-visual img {
   width: 100%;
   height: auto;
   display: block;
 }
 
 /* スペック表 */
-.spec-table{
+.spec-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
@@ -1080,7 +1110,7 @@ body {
 }
 
 .spec-table th,
-.spec-table td{
+.spec-table td {
   border: 1px solid #D9D9D9;
   padding: 10px 10px;
   vertical-align: top;
@@ -1091,7 +1121,7 @@ body {
 }
 
 /* 左側項目 */
-.spec-table th{
+.spec-table th {
   width: 32%;
   background: #F3F5F7;
 
@@ -1108,7 +1138,7 @@ body {
 }
 
 /* 右側テキスト */
-.spec-table td{
+.spec-table td {
   font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -1122,7 +1152,7 @@ body {
 
 /* 文字数が多い行だけ */
 .spec-table tbody tr:nth-child(6) td,
-.spec-table tbody tr:nth-child(7) td{
+.spec-table tbody tr:nth-child(7) td {
   font-size: 14px;
   line-height: 1.35;
   letter-spacing: -0.02em;
@@ -1132,12 +1162,12 @@ body {
 
 /* 上下の横線だけ残す（現状維持のため残置） */
 .spec-table tr:first-child th,
-.spec-table tr:first-child td{
+.spec-table tr:first-child td {
   border-top: 1px solid #D9D9D9;
 }
 
 .spec-table tr:last-child th,
-.spec-table tr:last-child td{
+.spec-table tr:last-child td {
   border-bottom: 1px solid #D9D9D9;
 }
 
@@ -1147,14 +1177,14 @@ body {
   CALL NOW（SP）FINAL（CLEAN）
 ========================= */
 
-.call-now{
+.call-now {
   background: #1C2430;
   padding: 56px 0 32px;
   font-family: "Noto Serif JP", serif;
 }
 
 /* Panel */
-.call-now-inner{
+.call-now-inner {
   position: relative;
   width: min(94vw, 380px);
   margin: 0 auto;
@@ -1173,7 +1203,7 @@ body {
   Ribbon
 ========================= */
 
-.call-now-ribbon{
+.call-now-ribbon {
   position: absolute;
   top: -58px;
   left: 50%;
@@ -1182,13 +1212,13 @@ body {
   z-index: 3;
 }
 
-.call-now-ribbon img{
+.call-now-ribbon img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.call-now-ribbon-text{
+.call-now-ribbon-text {
   position: absolute;
   inset: 0;
   display: flex;
@@ -1207,7 +1237,7 @@ body {
   transform: translateY(-4px);
 }
 
-.call-now-ribbon-text span{
+.call-now-ribbon-text span {
   display: inline-block;
   margin-top: 4px;
   font-size: 16px;
@@ -1218,24 +1248,26 @@ body {
   Price（縦2段×横2カラム：安定版）
 ========================= */
 
-.call-now-price{
+.call-now-price {
   display: flex;
   justify-content: center;
-  align-items: flex-end;  /* 金額の下端を揃える */
+  align-items: flex-end;
+  /* 金額の下端を揃える */
   gap: 24px;
   margin-top: 8px;
   text-align: center;
-  transform: translateY(-8px); /* ← -2〜-6pxで微調整 */
+  transform: translateY(-8px);
+  /* ← -2〜-6pxで微調整 */
 }
 
 /* pの余白リセット */
-.call-now-price p{
+.call-now-price p {
   margin: 0;
 }
 
 /* ラベル＋金額を縦積みに固定（ここが肝） */
 .price-regular,
-.price-sale{
+.price-sale {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1244,24 +1276,24 @@ body {
 
 /* 2段の間隔（詰めたいならここ） */
 .price-regular .price-value,
-.price-sale .price-value{
+.price-sale .price-value {
   margin-top: 2px;
 }
 
 /* 通常価格 */
-.price-regular .price-label{
+.price-regular .price-label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.price-regular .price-value{
+.price-regular .price-value {
   font-size: 22px;
   font-weight: 400;
   position: relative;
 }
 
 /* 通常価格：斜め線（赤） */
-.price-regular .price-value::after{
+.price-regular .price-value::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1273,44 +1305,45 @@ body {
 }
 
 /* 先行価格（目立たせ：箱は“p全体”に付くので縦長にならない） */
-.price-sale{
+.price-sale {
   padding: 10px 12px 8px;
   border-radius: 10px;
   background: rgba(227, 196, 107, 0.22);
   border: 1px solid rgba(227, 196, 107, 0.55);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
-.price-sale .price-label{
+.price-sale .price-label {
   font-size: 25px;
   font-weight: 700;
 }
 
-.price-sale .price-value{
+.price-sale .price-value {
   font-size: 40px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: .02em;
-  margin-top: 6px; /* 先行価格だけ少し余白 */
+  margin-top: 6px;
+  /* 先行価格だけ少し余白 */
 }
 
 /* =========================
   Date & Hours
 ========================= */
 
-.call-now-info{
+.call-now-info {
   margin-top: 12px;
   font-weight: 700;
   line-height: 1.5;
 }
 
 /* 期間：1行固定（数字だけ大きい） */
-.call-now-period{
+.call-now-period {
   margin: 8px 0 6px;
   text-align: center;
 }
 
-.call-now-period .info-value{
+.call-now-period .info-value {
   display: inline-block;
   white-space: nowrap;
   text-align: center;
@@ -1319,17 +1352,17 @@ body {
   font-feature-settings: "palt";
 }
 
-.call-now-period .t{
+.call-now-period .t {
   font-size: 16px;
 }
 
-.call-now-period .n{
+.call-now-period .n {
   font-size: 22px;
   line-height: 1;
 }
 
 /* 受付時間：1行固定＋文字詰め */
-.call-now-hours{
+.call-now-hours {
   position: relative;
   left: 0;
   display: flex;
@@ -1341,14 +1374,14 @@ body {
   font-feature-settings: "palt";
 }
 
-.call-now-hours .info-label{
+.call-now-hours .info-label {
   margin-right: 6px;
   font-size: 20px;
   font-weight: 700;
   white-space: nowrap;
 }
 
-.call-now-hours .info-value{
+.call-now-hours .info-value {
   font-size: 20px;
   font-weight: 700;
   white-space: nowrap;
@@ -1362,28 +1395,30 @@ body {
   NOTES（SP）
 ========================= */
 
-.notes{
+.notes {
   padding: 22px 0 26px;
-  background: transparent; /* セクション外側は塗らない想定 */
+  background: transparent;
+  /* セクション外側は塗らない想定 */
 }
 
-.notes-inner{
+.notes-inner {
   width: min(92vw, 360px);
   margin: 0 auto;
 }
 
 /* 注意事項ボックス（スクショの白パネル想定） */
-.notes-box{
+.notes-box {
   background: #ffffff;
   padding: 14px 14px 14px;
   box-sizing: border-box;
 }
 
 /* リスト全体 */
-.notes-list{
+.notes-list {
   margin: 0;
   padding: 0;
-  list-style: none; /* 自前の「・」にする */
+  list-style: none;
+  /* 自前の「・」にする */
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -1392,13 +1427,14 @@ body {
 }
 
 /* 各行（・付き） */
-.notes-list li{
+.notes-list li {
   position: relative;
-  padding-left: 1.15em; /* ・の分 */
+  padding-left: 1.15em;
+  /* ・の分 */
 }
 
 /* 「・」 */
-.notes-list li::before{
+.notes-list li::before {
   content: "・";
   position: absolute;
   left: 0;
@@ -1416,7 +1452,7 @@ body {
 /* --------------------------------
   Footer base
 -------------------------------- */
-.site-footer{
+.site-footer {
   background: #1C2430;
   padding: 22px 0;
   color: #FBFBFB;
@@ -1428,7 +1464,7 @@ body {
 }
 
 /* 中だけ少し狭い箱 */
-.site-footer-inner{
+.site-footer-inner {
   width: min(86vw, 320px);
   margin: 0 auto;
 }
@@ -1437,7 +1473,7 @@ body {
   Gold catch copy
 -------------------------------- */
 .footer-tagline,
-.footer-catch{
+.footer-catch {
   font-family: "Noto Serif JP", serif;
   color: #E3C46B;
   text-align: center;
@@ -1446,17 +1482,19 @@ body {
 }
 
 /* 1行目 */
-.footer-tagline{
+.footer-tagline {
   margin: 30px -8px 8px;
-  font-weight: 500;        /* Medium */
+  font-weight: 500;
+  /* Medium */
   font-size: 18px;
   line-height: 1.5;
 }
 
 /* 2行目 */
-.footer-catch{
+.footer-catch {
   margin: 0 -8px 50px;
-  font-weight: 700;        /* Bold */
+  font-weight: 700;
+  /* Bold */
   font-size: 22px;
   line-height: 1.5;
   letter-spacing: -0.04em;
@@ -1465,25 +1503,26 @@ body {
 /* --------------------------------
   Footer navigation
 -------------------------------- */
-.footer-nav{
+.footer-nav {
   margin: 0;
 }
 
-.footer-nav-list{
+.footer-nav-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.footer-nav-list li + li{
+.footer-nav-list li+li {
   margin-top: 6px;
 }
 
 /* a / button 共通リンク見た目 */
-.footer-link{
+.footer-link {
   display: inline-block;
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 500;        /* Medium */
+  font-weight: 500;
+  /* Medium */
   font-size: 14px;
   line-height: 1.6;
   color: #FBFBFB;
@@ -1494,18 +1533,18 @@ body {
 }
 
 /* hover / focus */
-.footer-link:hover{
+.footer-link:hover {
   text-decoration: underline;
 }
 
-.footer-link:focus-visible{
+.footer-link:focus-visible {
   outline: 2px solid #E3C46B;
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 /* buttonをaと完全に同一見た目にする */
-button.footer-link{
+button.footer-link {
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
@@ -1522,10 +1561,11 @@ button.footer-link{
 /* --------------------------------
   Copyright
 -------------------------------- */
-.footer-copy{
+.footer-copy {
   margin: 14px 0 0;
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 500;        /* Medium */
+  font-weight: 500;
+  /* Medium */
   font-size: 14px;
   line-height: 1.6;
   color: #FBFBFB;
@@ -1539,28 +1579,29 @@ button.footer-link{
 ========================= */
 
 html,
-body{
+body {
   height: 100%;
   overflow-x: hidden;
 }
 
 /* ✅ bodyには付けない */
-body{
+body {
   padding-bottom: 0;
 }
 
 /* ✅ コンテンツ側にだけ余白を持たせる */
-.page{
+.page {
   padding-bottom: 0;
 }
 
 /* 固定CTAの高さ（だいたい） */
-:root{
-  --cta-h: 92px; /* あなたのCTAに合わせて調整 */
+:root {
+  --cta-h: 92px;
+  /* あなたのCTAに合わせて調整 */
 }
 
 /* footerの下に余白を追加して、CTAに隠れないようにする */
-.site-footer{
+.site-footer {
   padding-bottom: calc(22px + var(--cta-h) + env(safe-area-inset-bottom));
 }
 
@@ -1569,7 +1610,7 @@ body{
 /* =========================
   固定エリア
 ========================= */
-.cta-fixed{
+.cta-fixed {
   position: fixed;
   left: 0;
   right: 0;
@@ -1586,16 +1627,16 @@ body{
   background: transparent;
 
   /* fixed安定化 */
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
 }
 
 /* =========================
   中央ラッパー
 ========================= */
-.cta-fixed__inner{
+.cta-fixed__inner {
   width: min(92vw, 360px);
   margin: 0 auto;
   position: relative;
@@ -1607,7 +1648,7 @@ body{
 /* =========================
   上部バッジ
 ========================= */
-.cta-fixed__badge{
+.cta-fixed__badge {
   position: absolute;
   top: 0;
   left: 50%;
@@ -1631,13 +1672,13 @@ body{
   border-radius: 999px;
   padding: 6px 48px;
 
-  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
 }
 
 /* =========================
   CTAボタン本体
 ========================= */
-.cta-fixed__btn{
+.cta-fixed__btn {
   display: block;
   position: relative;
   z-index: 1;
@@ -1647,11 +1688,11 @@ body{
   border-radius: 14px;
 
   padding: 18px 14px 10px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
 }
 
 /* 1行目（アイコン＋メイン文言） */
-.cta-fixed__btnrow{
+.cta-fixed__btnrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1659,14 +1700,14 @@ body{
 }
 
 /* アイコン */
-.cta-fixed__icon{
+.cta-fixed__icon {
   width: 18px;
   height: 18px;
   display: block;
 }
 
 /* メイン文言 */
-.cta-fixed__main{
+.cta-fixed__main {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -1680,7 +1721,7 @@ body{
 /* =========================
   サブ情報
 ========================= */
-.cta-fixed__sub{
+.cta-fixed__sub {
   margin-top: 4px;
   display: flex;
   justify-content: center;
@@ -1695,14 +1736,14 @@ body{
 }
 
 .cta-fixed__hours,
-.cta-fixed__tel{
+.cta-fixed__tel {
   white-space: nowrap;
 }
 
 /* =========================
   タップ時フィードバック
 ========================= */
-.cta-fixed__btn:active{
+.cta-fixed__btn:active {
   transform: translateY(1px);
 }
 
@@ -1715,20 +1756,36 @@ body{
   - 横はみ出し保険（副作用少）
   - 長い英数字だけ折り返し補助（強すぎない）
 ========================= */
-@media (max-width: 360px){
+@media (max-width: 360px) {
 
   /* 横はみ出しの根本保険 */
-  html, body{ overflow-x: hidden; }
-  img, video, svg, canvas{ max-width: 100%; height: auto; }
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  img,
+  video,
+  svg,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
 
   /* 長い英数字・URLなどだけ事故防止（anywhereは強すぎるので弱める） */
-  p, li, dd, dt, td, th{
+  p,
+  li,
+  dd,
+  dt,
+  td,
+  th {
     overflow-wrap: break-word;
     word-break: normal;
   }
 
   /* もし “nowrap” ユーティリティを自分で付けた要素がある時だけ解除したいなら */
-  .nowrap, .no-wrap{
+  .nowrap,
+  .no-wrap {
     white-space: normal !important;
   }
 }
@@ -1737,186 +1794,99 @@ body{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* =========================
-  Campaign Header（PC）
-  ※SPの後にそのまま貼る
+  PC FV FIX（768px〜）FINAL
+  - SP下部固定CTAをPCで無効化
+  - PC背景はbackground-imageで制御
+  - FV高さの暴走を防止
+========================= */
+@media (min-width: 768px) {
+
+  /* =========================
+    SP専用要素の無効化（PC）
+  ========================= */
+
+  /* 下部固定CTAはPCでは表示しない */
+  .cta-fixed {
+    display: none;
+  }
+
+  /* SP用の下余白が残っている場合の保険 */
+  .page {
+    padding-bottom: 0 !important;
+  }
+
+  /* =========================
+  HERO 基準
 ========================= */
 
-@media (min-width: 768px){
+.hero{
+  position: relative;
+  overflow: hidden;
+}
 
-  .campaign-header{
-    padding: 14px 24px; /* PCは上下左右に少し余裕 */
-  }
+/* =========================
+  HERO 背景（共通）
+  ※ 画像切り替えは picture / img 側で行う
+========================= */
 
-  /* 英字タイトル：Hang & Sit Chair */
-  .campaign-en{
-    font-size: 18px;
-    letter-spacing: 0.05em;
-  }
+.hero-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 
-  /* Early Bird Campaign（英字サブ） */
-  .campaign-label{
-    font-size: 14px;
-    margin-left: 8px;
-  }
+/* picture / img を FV 全体にフィットさせる */
+.hero-bg picture,
+.hero-bg img{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
-  /* 日本語テキスト */
-  .campaign-jp{
-    font-size: 15px;
-  }
-
+/* 画像のトリミングルール */
+.hero-bg img{
+  object-fit: cover;
+  object-position: center bottom;
 }
 
 
 
-/* =========================
-  PC（768px〜）：差分だけ上書き
-  ※SP（デフォルト）を先に書いた後に貼る
-========================= */
+  /* =========================
+    FV 高さ（伸びすぎ防止）
+  ========================= */
 
-@media (min-width: 768px){
-
-  /* 背景をFVに“はめる” */
-  .hero{
-    position: relative;
-    overflow: hidden;
+  .hero-inner {
+    min-height: 680px;
+    height: min(90vh, 760px);
   }
 
-  .hero-bg{
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+  /* =========================
+    位置微調整（安全側）
+  ========================= */
+
+  .hero-main {
+    transform: translateY(-20px);
   }
 
-  .hero-bg picture,
-  .hero-bg img{
-    display: block;
-    width: 100%;
-    height: 100%;
+  .hero-visual {
+    transform: translateY(-10px);
   }
 
-  .hero-bg img{
-    object-fit: cover;
-    object-position: center; /* 上寄せにしたいなら center top */
+  .hero-badges {
+    bottom: 24px;
   }
 
-  /* FVの高さ：ヘッダー分だけ短くする（数値はあとで微調整） */
-  .hero-inner{
-    min-height: calc(100svh - 72px); /* ← ヘッダー高さぶん */
-    height: calc(100svh - 72px);
+  .hero-campaign {
+    bottom: 24px;
   }
 
-
-
-  /* --- 上のラベル（おすすめ・〜など） --- */
-  .hero-label{
-    display: inline-block;
-    width: auto;
-    padding: 12px 18px;
-    margin-bottom: 18px;
+  .hero-brand {
+    bottom: 10px;
   }
 
-  .hero-label-text{
-    font-size: 20px;
-    white-space: nowrap; /* PCは1行維持 */
-  }
-
-  /* --- メイン2カラム --- */
-  .hero-main{
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 18px;
-    align-items: start;
-    padding-top: 10px;
-
-    /* PCだけ全体を少し上げる（SPの値があるなら上書き） */
-    transform: translateY(-40px);
-  }
-
-  /* --- 見出し --- */
-  .hero-title{
-    font-size: 56px;
-    -webkit-text-stroke: 2px #E3C46B;
-  }
-
-  /* --- 画像側 --- */
-  .hero-visual{
-    justify-content: flex-end;
-    margin-top: 0;
-
-    /* 画像ブロックだけ少し上げる */
-    transform: translateY(-24px);
-  }
-
-  .hero-image{
-    max-width: 480px;
-  }
-
-  /* SP用 transform を完全に解除 */
-  .hero-image:not(.is-b),
-  .hero-image.is-b{
-    transform: none;
-  }
-
-  /* --- 左下バッジ群 --- */
-  .hero-badges{
-    left: 18px;
-    bottom: 34px;
-    gap: 14px;
-  }
-
-  .hero-badge{
-    width: 110px;
-    height: 110px;
-  }
-
-  .badge-top{
-    font-size: 18px;
-  }
-
-  .badge-main{
-    font-size: 13px;
-  }
-
-  /* --- 右下キャンペーン丸 --- */
-  .hero-campaign{
-    right: 18px;
-    bottom: 18px;
-    width: 150px;
-    height: 150px;
-  }
-
-  .campaign-note{
-    font-size: 12px;
-  }
-
-  .campaign-price{
-    font-size: 26px;
-  }
-
-  .campaign-date{
-    font-size: 12px;
-  }
-
-  /* --- 右下ブランド名（会社名） --- */
-  .hero-brand{
-    right: 18px;
-    bottom: 6px;
-  }
 }
+
 
 
 
@@ -1925,29 +1895,31 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .benefit{
-    padding: 88px 24px; /* PCは余白をしっかり */
+  .benefit {
+    padding: 88px 24px;
+    /* PCは余白をしっかり */
   }
 
-  .benefit-inner{
-    max-width: 1100px; /* SPと同じ上限でOK */
+  .benefit-inner {
+    max-width: 1100px;
+    /* SPと同じ上限でOK */
   }
 
   /* 一覧：PCは2カラムで見やすく */
-  .benefit-grid{
+  .benefit-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
   }
 
   /* カード：余白をほんの少し増やす */
-  .benefit-card{
+  .benefit-card {
     gap: 12px;
   }
 
   /* 画像に重ねるテキスト：PCは少し上＆横幅に余裕 */
-  .benefit-caption{
+  .benefit-caption {
     top: 64px;
     gap: 10px;
     width: calc(100% - 48px);
@@ -1955,20 +1927,20 @@ body{
   }
 
   /* POINT（座布団） */
-  .benefit-badge{
+  .benefit-badge {
     font-size: 20px;
     padding: 2px 8px 3px;
     letter-spacing: 0.09em;
   }
 
   /* 見出し本体 */
-  .benefit-heading{
+  .benefit-heading {
     font-size: 26px;
     line-height: 1.32;
   }
 
   /* 見出し：1行ごとの座布団 */
-  .benefit-heading-line{
+  .benefit-heading-line {
     padding: 2px 8px 3px;
   }
 
@@ -1980,34 +1952,38 @@ body{
   ※SPの後にそのまま貼る
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .safety{
-    padding: 88px 24px; /* PCは縦の余白をしっかり */
+  .safety {
+    padding: 88px 24px;
+    /* PCは縦の余白をしっかり */
   }
 
-  .safety-box{
-    max-width: 720px; /* SPと同じでOK */
+  .safety-box {
+    max-width: 720px;
+    /* SPと同じでOK */
   }
 
   /* 座布団タイトル */
-  .safety-label{
-    font-size: 18px; /* SPと同じ（完成してる） */
+  .safety-label {
+    font-size: 18px;
+    /* SPと同じ（完成してる） */
   }
 
   /* 画像ブロック */
-  .safety-visual{
+  .safety-visual {
     margin-top: 36px;
   }
 
-  .safety-visual:first-of-type{
+  .safety-visual:first-of-type {
     margin-top: 22px;
   }
 
   /* 説明テキスト */
-  .safety-text{
+  .safety-text {
     margin-top: 8px;
-    line-height: 1.7; /* PCは少しだけ読みやすく */
+    line-height: 1.7;
+    /* PCは少しだけ読みやすく */
   }
 
 }
@@ -2018,77 +1994,82 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
   /* セクション土台：左右余白を少し広げて品よく */
-  .early-bird-bonus{
+  .early-bird-bonus {
     padding: 0 24px 28px;
   }
 
   /* 中央の基準幅：PCは広げて読みやすく */
-  .early-bird-inner{
+  .early-bird-inner {
     max-width: 980px;
   }
 
   /* ---------- Header（全幅） ---------- */
-  .early-bird-header{
+  .early-bird-header {
     padding: 16px 24px 16px;
   }
 
   /* 下のネイビー帯：少し厚くして安定感 */
-  .early-bird-header::after{
+  .early-bird-header::after {
     bottom: -10px;
     height: 10px;
   }
 
-  .early-bird-brand{
+  .early-bird-brand {
     font-size: 28px;
     margin-bottom: 6px;
   }
 
-  .early-bird-title{
+  .early-bird-title {
     font-size: 40px;
     line-height: 1.1;
   }
 
   /* ---------- Lead（グレー＋ゴールド） ---------- */
-  .early-bird-lead-top{
+  .early-bird-lead-top {
     margin: 14px calc(50% - 50vw) 2px;
     padding: 6px 24px;
 
     font-size: 20px;
-    letter-spacing: -0.02em; /* PCは詰めすぎない */
+    letter-spacing: -0.02em;
+    /* PCは詰めすぎない */
   }
 
-  .early-bird-highlight{
-    max-width: 760px;        /* PCは横に伸びすぎないよう制御 */
-    margin: 14px auto 0;     /* 中央寄せで上品に */
+  .early-bird-highlight {
+    max-width: 760px;
+    /* PCは横に伸びすぎないよう制御 */
+    margin: 14px auto 0;
+    /* 中央寄せで上品に */
     padding: 10px 18px 11px;
 
     font-size: 20px;
   }
 
-  .early-bird-strong{
+  .early-bird-strong {
     font-size: 26px;
   }
 
   /* ---------- 特典リスト（PCは中央に整列） ---------- */
-  .early-bird-list{
-    max-width: 860px;      /* 読みやすい横幅に */
-    margin: 18px auto 0;   /* 100vwの“ネイビー見せ”はPCでは不要なので中央化 */
+  .early-bird-list {
+    max-width: 860px;
+    /* 読みやすい横幅に */
+    margin: 18px auto 0;
+    /* 100vwの“ネイビー見せ”はPCでは不要なので中央化 */
 
     padding: 18px 18px;
   }
 
-  .early-bird-item + .early-bird-item{
+  .early-bird-item+.early-bird-item {
     margin-top: 18px;
   }
 
-  .early-bird-item-title{
+  .early-bird-item-title {
     font-size: 20px;
   }
 
-  .early-bird-item-desc{
+  .early-bird-item-desc {
     margin-top: 8px;
     font-size: 15px;
     letter-spacing: -0.02em;
@@ -2103,18 +2084,18 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .countdown{
+  .countdown {
     padding: 28px 24px;
   }
 
-  .countdown-inner{
+  .countdown-inner {
     max-width: 720px;
   }
 
   /* タイトル（座布団） */
-  .countdown-title{
+  .countdown-title {
     padding: 6px 18px;
     margin-bottom: 18px;
     font-size: 20px;
@@ -2122,12 +2103,12 @@ body{
   }
 
   /* タイマー全体 */
-  .countdown-timer{
+  .countdown-timer {
     gap: 10px;
   }
 
   /* 外枠（枠線ボックス） */
-  .countdown-box{
+  .countdown-box {
     width: 80px;
     padding: 22px 8px;
     border-width: 3px;
@@ -2135,19 +2116,19 @@ body{
   }
 
   /* 数字 */
-  .countdown-box > span{
+  .countdown-box>span {
     font-size: 40px;
   }
 
   /* ラベル */
-  .countdown-label{
+  .countdown-label {
     margin-top: 6px;
     font-size: 13px;
     letter-spacing: 0.05em;
   }
 
   /* コロン：transform無しのまま中央に見えるよう調整 */
-  .countdown-sep{
+  .countdown-sep {
     font-size: 40px;
     margin-top: -24px;
   }
@@ -2161,38 +2142,38 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
   /* Section */
-  .user-voice{
+  .user-voice {
     padding: 56px 0 64px;
   }
 
   /* Panel：横幅を広げて読みやすく */
-  .user-voice-inner{
+  .user-voice-inner {
     width: min(900px, 92vw);
     padding: 44px 28px 26px;
   }
 
   /* 背景の左右拡張：PCは広めに */
-  .user-voice-inner::before{
+  .user-voice-inner::before {
     left: -40px;
     right: -40px;
   }
 
   /* Title（半分乗せ） */
-  .user-voice-title{
+  .user-voice-title {
     padding: 8px 18px 9px;
     font-size: 20px;
   }
 
   /* item間の余白：PCは少しゆったり */
-  .user-voice-item{
+  .user-voice-item {
     padding: 18px 0;
   }
 
   /* Divider：見た目の薄さは維持（必要なら） */
-  .user-voice-divider{
+  .user-voice-divider {
     transform: scaleY(0.5);
   }
 
@@ -2205,53 +2186,53 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .faq{
+  .faq {
     padding: 56px 0 72px;
   }
 
-  .faq-inner{
+  .faq-inner {
     width: min(92vw, 980px);
   }
 
   /* 見出し（座布団） */
-  .faq-title{
+  .faq-title {
     margin-bottom: 28px;
     font-size: 20px;
     padding: 4px 0;
   }
 
   /* リスト外側：PCは左右を少し広げて読みやすく */
-  .faq-list{
+  .faq-list {
     padding: 0 80px;
   }
 
   /* 1問セット：余白を少しだけゆったり */
-  .faq-item{
+  .faq-item {
     row-gap: 12px;
     margin-bottom: 30px;
   }
 
   /* Q/A 行共通 */
   .faq-q,
-  .faq-a{
+  .faq-a {
     grid-template-columns: 36px 1fr;
     column-gap: 12px;
     font-size: 17px;
     letter-spacing: 0;
   }
 
-  .faq-q{
+  .faq-q {
     line-height: 1.7;
   }
 
-  .faq-a{
+  .faq-a {
     line-height: 1.45;
   }
 
   /* Q/A バッジ */
-  .faq-badge{
+  .faq-badge {
     width: 36px;
     height: 36px;
     font-size: 24px;
@@ -2266,48 +2247,49 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .spaces{
+  .spaces {
     padding: 56px 0 72px;
   }
 
-  .spaces-inner{
+  .spaces-inner {
     width: min(92vw, 980px);
   }
 
   /* タイトル（座布団） */
-  .spaces-title{
+  .spaces-title {
     margin-bottom: 28px;
     font-size: 20px;
     padding: 4px 0;
   }
 
   /* サイズ図：PCは余白を少し増やす */
-  .spaces-visual{
+  .spaces-visual {
     margin-bottom: 22px;
   }
 
   /* スペック表：PCは字間詰めを緩める */
-  .spec-table{
+  .spec-table {
     letter-spacing: -0.01em;
   }
 
   .spec-table th,
-  .spec-table td{
+  .spec-table td {
     padding: 14px 14px;
   }
 
   /* 左側項目 */
-  .spec-table th{
-    width: 28%;          /* PCは少し細くして右を広げる */
+  .spec-table th {
+    width: 28%;
+    /* PCは少し細くして右を広げる */
     font-size: 15px;
     line-height: 1.45;
     padding-right: 10px;
   }
 
   /* 右側テキスト */
-  .spec-table td{
+  .spec-table td {
     font-size: 17px;
     line-height: 1.7;
     padding-left: 18px;
@@ -2315,7 +2297,7 @@ body{
 
   /* 文字数が多い行だけ（PCも少し上げて読みやすく） */
   .spec-table tbody tr:nth-child(6) td,
-  .spec-table tbody tr:nth-child(7) td{
+  .spec-table tbody tr:nth-child(7) td {
     font-size: 15px;
     line-height: 1.55;
     letter-spacing: -0.01em;
@@ -2330,32 +2312,33 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .call-now{
+  .call-now {
     padding: 88px 0 72px;
   }
 
   /* Panel */
-  .call-now-inner{
+  .call-now-inner {
     width: min(92vw, 900px);
-    padding: 74px 32px 34px; /* PCは上下左右に余裕 */
+    padding: 74px 32px 34px;
+    /* PCは上下左右に余裕 */
   }
 
   /* Ribbon */
-  .call-now-ribbon{
+  .call-now-ribbon {
     top: -70px;
     width: min(78%, 520px);
   }
 
   /* Ribbon text */
-  .call-now-ribbon-text{
+  .call-now-ribbon-text {
     font-size: 26px;
     padding-top: 10px;
     transform: translateY(-6px);
   }
 
-  .call-now-ribbon-text span{
+  .call-now-ribbon-text span {
     margin-top: 6px;
     font-size: 20px;
   }
@@ -2364,40 +2347,40 @@ body{
     Price（PC）
   ========================= */
 
-  .call-now-price{
+  .call-now-price {
     gap: 48px;
     margin-top: 14px;
   }
 
   /* 通常価格ブロック：PCは下げすぎない */
-  .price-item.price-regular{
+  .price-item.price-regular {
     margin-top: 18px;
   }
 
   /* 通常価格 */
-  .price-regular .price-label{
+  .price-regular .price-label {
     font-size: 18px;
   }
 
-  .price-regular .price-value{
+  .price-regular .price-value {
     font-size: 28px;
   }
 
-  .price-regular .price-value::after{
+  .price-regular .price-value::after {
     height: 2px;
     transform: rotate(-10deg);
   }
 
   /* 先行価格 */
-  .price-sale{
+  .price-sale {
     margin-bottom: 18px;
   }
 
-  .price-sale .price-label{
+  .price-sale .price-label {
     font-size: 32px;
   }
 
-  .price-sale .price-value{
+  .price-sale .price-value {
     margin-top: 8px;
     font-size: 52px;
   }
@@ -2406,35 +2389,36 @@ body{
     Date & Hours（PC）
   ========================= */
 
-  .call-now-info{
+  .call-now-info {
     margin-top: 18px;
     line-height: 1.55;
   }
 
-  .call-now-period{
+  .call-now-period {
     margin: 12px 0 10px;
   }
 
-  .call-now-period .t{
+  .call-now-period .t {
     font-size: 18px;
   }
 
-  .call-now-period .n{
+  .call-now-period .n {
     font-size: 28px;
   }
 
-  .call-now-hours{
+  .call-now-hours {
     margin-top: 10px;
-    left: 0; /* PCでは寄せ調整を解除して自然に */
+    left: 0;
+    /* PCでは寄せ調整を解除して自然に */
     line-height: 1.4;
   }
 
-  .call-now-hours .info-label{
+  .call-now-hours .info-label {
     margin-right: 10px;
     font-size: 22px;
   }
 
-  .call-now-hours .info-value{
+  .call-now-hours .info-value {
     font-size: 22px;
     letter-spacing: 0.02em;
   }
@@ -2448,36 +2432,37 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .notes{
+  .notes {
     padding: 56px 0 72px;
   }
 
-  .notes-inner{
+  .notes-inner {
     width: min(92vw, 980px);
   }
 
   /* 注意事項ボックス */
-  .notes-box{
-    max-width: 860px;      /* 文章が横に伸びすぎないよう制御 */
+  .notes-box {
+    max-width: 860px;
+    /* 文章が横に伸びすぎないよう制御 */
     margin: 0 auto;
     padding: 22px 24px;
   }
 
   /* リスト全体 */
-  .notes-list{
+  .notes-list {
     font-size: 17px;
     line-height: 1.85;
   }
 
   /* 各行（・付き） */
-  .notes-list li{
+  .notes-list li {
     padding-left: 1.25em;
   }
 
   /* 「・」 */
-  .notes-list li::before{
+  .notes-list li::before {
     line-height: 1.85;
   }
 
@@ -2490,49 +2475,50 @@ body{
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
-  .site-footer{
+  .site-footer {
     padding: 44px 0;
   }
 
   /* 中の箱：PCは広げる */
-  .site-footer-inner{
+  .site-footer-inner {
     width: min(92vw, 980px);
   }
 
   /* ゴールド2行：余白とサイズをPC向けに */
   .footer-tagline,
-  .footer-catch{
+  .footer-catch {
     margin-left: 0;
     margin-right: 0;
   }
 
-  .footer-tagline{
+  .footer-tagline {
     margin: 22px 0 10px;
     font-size: 20px;
   }
 
-  .footer-catch{
+  .footer-catch {
     margin: 0 0 44px;
     font-size: 28px;
     letter-spacing: -0.02em;
   }
 
   /* ナビ：PCは少し大きく・間隔も広め */
-  .footer-nav-list li + li{
+  .footer-nav-list li+li {
     margin-top: 8px;
   }
 
-  .footer-link{
+  .footer-link {
     font-size: 15px;
     line-height: 1.7;
   }
 
   /* コピーライト：少し下に余白 */
-  .footer-copy{
+  .footer-copy {
     margin-top: 18px;
-    font-size: 14px; /* ここは据え置きでOK */
+    font-size: 14px;
+    /* ここは据え置きでOK */
   }
 
 }
@@ -2544,45 +2530,45 @@ body{
   表示する場合の差分（SPの後に貼る）
 ========================= */
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
   /* PCでも固定するなら、コンテンツ下に余白を確保 */
-  .page{
+  .page {
     padding-bottom: 110px;
   }
 
-  .cta-fixed{
+  .cta-fixed {
     padding: 12px 12px;
     padding-bottom: 12px;
   }
 
-  .cta-fixed__inner{
+  .cta-fixed__inner {
     width: min(92vw, 520px);
     padding-top: 18px;
   }
 
-  .cta-fixed__badge{
+  .cta-fixed__badge {
     font-size: 16px;
     padding: 6px 54px;
   }
 
-  .cta-fixed__btn{
+  .cta-fixed__btn {
     border-radius: 16px;
     padding: 18px 18px 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.16);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .16);
   }
 
-  .cta-fixed__icon{
+  .cta-fixed__icon {
     width: 20px;
     height: 20px;
   }
 
-  .cta-fixed__main{
+  .cta-fixed__main {
     font-size: 22px;
     transform: translateY(-2px);
   }
 
-  .cta-fixed__sub{
+  .cta-fixed__sub {
     margin-top: 6px;
     font-size: 13px;
     gap: 12px;
@@ -2590,8 +2576,8 @@ body{
 
 }
 
-
-/* =========================
+@media (max-width: 767px) {
+  /* =========================
   HERO FINAL OVERRIDE（確定・整理版）
   - 高さ：画面高 - 上ヘッダー - 下固定CTA
   - 背景：床寄せ
@@ -2602,189 +2588,224 @@ body{
   ※ CSSの一番最後に貼る（この1ブロックだけ）
 ========================= */
 
-/* ---------- 高さ計算用（実測値） ---------- */
-:root{
-  --campaign-h: 64.8px; /* 上のキャンペーンヘッダー高さ */
-  --cta-fixed-h: 48px;  /* 下部固定CTAとして差し引く分（決定値） */
-}
+  /* ---------- 高さ計算用（実測値） ---------- */
+  :root {
+    --campaign-h: 64.8px;
+    /* 上のキャンペーンヘッダー高さ */
+    --cta-fixed-h: 48px;
+    /* 下部固定CTAとして差し引く分（決定値） */
+  }
 
-/* ---------- HERO 高さ（背景の長さ） ---------- */
-.hero{
-  min-height: 0 !important;
-  height: calc(100svh - var(--campaign-h) - var(--cta-fixed-h)) !important;
-  overflow: hidden !important;
-  position: relative;
-}
+  /* ---------- HERO 高さ（背景の長さ） ---------- */
+  .hero {
+    min-height: 0 !important;
+    height: calc(100svh - var(--campaign-h) - var(--cta-fixed-h)) !important;
+    overflow: hidden !important;
+    position: relative;
+  }
 
-.hero-inner{
-  min-height: 0 !important;
-  height: 100% !important;
-  position: relative; /* absolute基準 */
-}
+  .hero-inner {
+    min-height: 0 !important;
+    height: 100% !important;
+    position: relative;
+    /* absolute基準 */
+  }
 
-/* 背景は必ずHEROの高さにフィット + 床寄せ */
-.hero-bg,
-.hero-bg img{
-  height: 100% !important;
-}
+  /* 背景は必ずHEROの高さにフィット + 床寄せ */
+  .hero-bg,
+  .hero-bg img {
+    height: 100% !important;
+  }
 
-.hero-bg img{
-  object-fit: cover;
-  object-position: center bottom !important;
-  display: block;
-}
+  .hero-bg img {
+    object-fit: cover;
+    object-position: center bottom !important;
+    display: block;
+  }
 
-/* ---------- 右下帯：左バッジ / 右バッジ / ブランド ---------- */
-.hero-badges,
-.hero-campaign,
-.hero-brand{
-  position: absolute !important;
-  z-index: 20 !important;
-}
+  /* ---------- 右下帯：左バッジ / 右バッジ / ブランド ---------- */
+  .hero-badges,
+  .hero-campaign,
+  .hero-brand {
+    position: absolute !important;
+    z-index: 20 !important;
+  }
 
-.hero-badges{
-  left: 10px !important;
-  bottom: 100px !important;
-}
+  .hero-badges {
+    left: 10px !important;
+    bottom: 100px !important;
+  }
 
-.hero-campaign{
-  right: 6px !important;
-  bottom: 100px !important;
-}
+  .hero-campaign {
+    right: 6px !important;
+    bottom: 100px !important;
+  }
 
-.hero-brand{
-  right: 20px !important;
-  bottom: 92px !important;
-}
+  .hero-brand {
+    right: 20px !important;
+    bottom: 92px !important;
+  }
 
-/* ---------- 左バッジ：見た目（画像）+ 文字 ---------- */
-.hero-badge{
-  width: 84px;
-  height: 84px;
+  /* ---------- 左バッジ：見た目（画像）+ 文字 ---------- */
+  .hero-badge {
+    width: 84px;
+    height: 84px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
 
-.hero-badge--30{ background-image: url("images/hero-badge-guarantee-30.svg"); }
-.hero-badge--1y{ background-image: url("images/hero-badge-warranty-1y.svg"); }
+  .hero-badge--30 {
+    background-image: url("images/hero-badge-guarantee-30.svg");
+  }
 
-.hero-badge .badge-top,
-.hero-badge .badge-main{
-  font-family: "Noto Serif JP", serif !important;
-  font-weight: 700 !important;
-  color: #FBFBFB !important;
-}
+  .hero-badge--1y {
+    background-image: url("images/hero-badge-warranty-1y.svg");
+  }
 
-/* 30日満足保障だけ微調整（元の仕様） */
-.hero-badge--30 .badge-top,
-.hero-badge--30 .badge-main{
-  transform: translate(-2px, -2px) !important;
-}
+  .hero-badge .badge-top,
+  .hero-badge .badge-main {
+    font-family: "Noto Serif JP", serif !important;
+    font-weight: 700 !important;
+    color: #FBFBFB !important;
+  }
 
-.badge-top{
-  font-size: 14px !important;
-  line-height: 1.05 !important;
-}
+  /* 30日満足保障だけ微調整（元の仕様） */
+  .hero-badge--30 .badge-top,
+  .hero-badge--30 .badge-main {
+    transform: translate(-2px, -2px) !important;
+  }
 
-.badge-main{
-  font-size: 11px !important;
-  line-height: 1.5 !important;
-  margin-top: 1px !important;
-}
+  .badge-top {
+    font-size: 14px !important;
+    line-height: 1.05 !important;
+  }
 
-/* ---------- 人物：位置確定（A/B） ---------- */
-.hero-image:not(.is-b){
-  transform: translateY(-270px) translateX(14px) scale(0.92) !important;
-}
+  .badge-main {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    margin-top: 1px !important;
+  }
 
-.hero-image.is-b{
-  transform: translateY(-280px) translateX(-2px) scale(0.86) !important;
-}
+  /* ---------- 人物：位置確定（A/B） ---------- */
+  .hero-image:not(.is-b) {
+    transform: translateY(-270px) translateX(14px) scale(0.92) !important;
+  }
 
-/* =========================================================
+  .hero-image.is-b {
+    transform: translateY(-280px) translateX(-2px) scale(0.86) !important;
+  }
+
+  /* =========================================================
   右下キャンペーン（中の文字）確定
   - サイズ
   - 位置（上げ）
   - 行間/余白
 ========================================================= */
 
-/* 文字サイズ */
-.hero-campaign .campaign-note{  font-size: 10px; }
-.hero-campaign .campaign-label{ font-size: 11px; }
-.hero-campaign .campaign-date{  font-size: 9px; }
+  /* 文字サイズ */
+  .hero-campaign .campaign-note {
+    font-size: 10px;
+  }
 
-.hero-campaign .campaign-price{ font-size: 18px; }
+  .hero-campaign .campaign-label {
+    font-size: 11px;
+  }
 
-/* 5,000（※お好みで500→700などにしてOK） */
-.hero-campaign .campaign-price .price-num{
-  font-size: 1em;
-  font-weight: 500;
+  .hero-campaign .campaign-date {
+    font-size: 9px;
+  }
+
+  .hero-campaign .campaign-price {
+    font-size: 18px;
+  }
+
+  /* 5,000（※お好みで500→700などにしてOK） */
+  .hero-campaign .campaign-price .price-num {
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  /* 円 / OFF */
+  .hero-campaign .campaign-price .price-yen {
+    font-size: 0.75em;
+    margin-left: 1px;
+  }
+
+  .hero-campaign .campaign-price .price-off {
+    font-size: 0.9em;
+    margin-left: 2px;
+  }
+
+  /* 文字全体を少し上に */
+  .hero-campaign .campaign-note,
+  .hero-campaign .campaign-label,
+  .hero-campaign .campaign-price,
+  .hero-campaign .campaign-date {
+    position: relative;
+    top: -10px;
+
+    line-height: 1.1;
+    /* 共通：行間を詰める */
+  }
+
+  /* 行間の微調整（あなたの決定値） */
+  .hero-campaign .campaign-note {
+    margin-bottom: 2px;
+  }
+
+  .hero-campaign .campaign-label {
+    margin-bottom: 0;
+  }
+
+  .hero-campaign .campaign-price {
+    margin-top: 0;
+    margin-bottom: 1px;
+  }
+
+  .hero-campaign .campaign-date {
+    margin-top: 1px;
+  }
 }
-
-/* 円 / OFF */
-.hero-campaign .campaign-price .price-yen{
-  font-size: 0.75em;
-  margin-left: 1px;
-}
-
-.hero-campaign .campaign-price .price-off{
-  font-size: 0.9em;
-  margin-left: 2px;
-}
-
-/* 文字全体を少し上に */
-.hero-campaign .campaign-note,
-.hero-campaign .campaign-label,
-.hero-campaign .campaign-price,
-.hero-campaign .campaign-date{
-  position: relative;
-  top: -10px;
-
-  line-height: 1.1; /* 共通：行間を詰める */
-}
-
-/* 行間の微調整（あなたの決定値） */
-.hero-campaign .campaign-note{  margin-bottom: 2px; }
-.hero-campaign .campaign-label{ margin-bottom: 0; }
-.hero-campaign .campaign-price{ margin-top: 0; margin-bottom: 1px; }
-.hero-campaign .campaign-date{  margin-top: 1px; }
-
 
 
 
 /* =========================
   Narrow screen override（〜360px）
 ========================= */
-@media (max-width: 360px){
+@media (max-width: 360px) {
 
   /* Hero label */
-  .hero-label-text{
-    font-size: 18px;   /* 20 → 18 */
+  .hero-label-text {
+    font-size: 18px;
+    /* 20 → 18 */
     line-height: 1.25;
   }
 
   /* Early bird lead */
-  .early-bird-lead-top{
-    font-size: 16px;          /* 360でもこのサイズ */
+  .early-bird-lead-top {
+    font-size: 16px;
+    /* 360でもこのサイズ */
     letter-spacing: -0.04em;
   }
 
   /* Footer */
-  .footer-tagline{
-    font-size: 16px;   /* 18 → 16 */
+  .footer-tagline {
+    font-size: 16px;
+    /* 18 → 16 */
     line-height: 1.45;
   }
 
-  .footer-catch{
-    font-size: 18px;   /* 22 → 18 */
+  .footer-catch {
+    font-size: 18px;
+    /* 22 → 18 */
     line-height: 1.45;
     letter-spacing: -0.03em;
   }
@@ -2796,96 +2817,100 @@ body{
   Narrow screen override（〜320px）
   ※ SP / PC / FV 全部の最終上書き
 ========================= */
-@media (max-width: 320px){
+@media (max-width: 320px) {
 
-    /* Hero label（さらに微調整） */
-  .hero-label-text{
+  /* Hero label（さらに微調整） */
+  .hero-label-text {
     font-size: 17px;
   }
 
   /* Benefit */
-  .benefit-heading{
+  .benefit-heading {
     font-size: 18px;
     line-height: 1.3;
   }
 
-  .benefit-heading-line{
+  .benefit-heading-line {
     padding: 1px 5px 2px;
   }
 
   /* Safety text */
-  .safety-text{
-    font-size: 16px;   /* 18 → 16 */
+  .safety-text {
+    font-size: 16px;
+    /* 18 → 16 */
     line-height: 1.55;
   }
 
   /* Early bird */
-  .early-bird-brand{
-    font-size: 20px;        /* 24 → 20 */
+  .early-bird-brand {
+    font-size: 20px;
+    /* 24 → 20 */
     letter-spacing: 0.04em;
   }
 
-  .early-bird-title{
-    font-size: 24px;        /* 30 → 24 */
+  .early-bird-title {
+    font-size: 24px;
+    /* 30 → 24 */
     line-height: 1.2;
     letter-spacing: 0.03em;
   }
 
-  .early-bird-lead-top{
-    font-size: 14px;          /* 18 → 14 */
+  .early-bird-lead-top {
+    font-size: 14px;
+    /* 18 → 14 */
     letter-spacing: -0.04em;
   }
 
-  .early-bird-highlight{
-    font-size: 16px;     /* 18 → 16 */
+  .early-bird-highlight {
+    font-size: 16px;
+    /* 18 → 16 */
     line-height: 1.35;
     letter-spacing: -0.03em;
   }
 
-  .early-bird-strong{
-    font-size: 20px;     /* 22 → 20 */
+  .early-bird-strong {
+    font-size: 20px;
+    /* 22 → 20 */
     line-height: 1.15;
   }
 
-  .early-bird-item-title{
-    font-size: 16px;     /* 18 → 16 */
+  .early-bird-item-title {
+    font-size: 16px;
+    /* 18 → 16 */
   }
 
-  .early-bird-item-desc{
-    font-size: 13px;     /* 14 → 13 */
+  .early-bird-item-desc {
+    font-size: 13px;
+    /* 14 → 13 */
     line-height: 1.25;
   }
 
   /* Countdown */
-  .countdown-title{
-    font-size: 16px;     /* 18 → 16 */
+  .countdown-title {
+    font-size: 16px;
+    /* 18 → 16 */
     line-height: 1.25;
     padding: 4px 10px;
     letter-spacing: -0.01em;
   }
 
   /* Call now */
-  .call-now-inner{
-    padding-top: 66px;   /* 58 → 66 */
+  .call-now-inner {
+    padding-top: 66px;
+    /* 58 → 66 */
   }
 
-  .call-now-ribbon-text{
-    font-size: 18px;     /* 20 → 18 */
+  .call-now-ribbon-text {
+    font-size: 18px;
+    /* 20 → 18 */
     line-height: 1.1;
     transform: translateY(-6px);
   }
 
-  .call-now-ribbon-text span{
-    font-size: 14px;     /* 16 → 14 */
+  .call-now-ribbon-text span {
+    font-size: 14px;
+    /* 16 → 14 */
     margin-top: 2px;
   }
 
 }
-
-
-
-
-
-
-
-
