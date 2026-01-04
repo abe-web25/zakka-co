@@ -1757,44 +1757,43 @@ button.footer-link {
 
 
 /* =========================
-  CTA Fixed（SP）FINAL
-  - SPは footer にCTA分の余白を足して、背景を下まで伸ばす
-  - page / body には余白を付けない
+  CTA Fixed（SP）FINAL（整理版）
+  - SPは footer にCTA分の余白を足して背景を下まで伸ばす
+  - page / body には余白を付けない（白余白対策）
+  ※ SPベースCSSの後〜CSS末尾寄りに置く
 ========================= */
 
-/* 基本（SPのみの固定CTA運用） */
+/* ===== 基本（共通） ===== */
 html,
 body{
   height: 100%;
   overflow-x: hidden;
 }
 
+/* ✅ 余計な下余白は作らない */
 body{
-  padding-bottom: 0;
+  padding-bottom: 0 !important;
 }
 
+/* ✅ SPは page に余白を入れない（白が出やすい） */
 .page{
-  padding-bottom: 0;
+  padding-bottom: 0 !important;
 }
 
-/* 固定CTAの高さ（実測に合わせて） */
+/* CTA高さ（実測） */
 :root{
   --cta-h-sp: 92px;
 }
 
-/* SP：footerの下に余白を追加して、CTAに隠れないようにする */
+/* ===== SP：footer背景をCTA上まで伸ばす ===== */
 @media (max-width: 767px){
   .site-footer{
-    padding-bottom: calc(22px + var(--cta-h-sp) + env(safe-area-inset-bottom));
-  }
-
-  .page{
-    padding-bottom: calc(var(--cta-h-sp) + 22px + env(safe-area-inset-bottom));
+    padding-bottom: calc(22px + var(--cta-h-sp) + env(safe-area-inset-bottom)) !important;
   }
 }
 
 /* =========================
-  固定エリア
+  固定エリア（SP固定CTA）
 ========================= */
 .cta-fixed{
   position: fixed;
@@ -1939,43 +1938,213 @@ body{
 
 
 /* =========================
-  Narrow safety (〜360px)
-  - 横はみ出し保険（副作用少）
-  - 長い英数字だけ折り返し補助（強すぎない）
+  Narrow screens
+  - 〜360px：横はみ出し保険 + 各所の微調整
+  - 〜320px：さらに最終微調整
 ========================= */
-@media (max-width: 360px) {
 
-  /* 横はみ出しの根本保険 */
+
+/* =========================
+  〜360px
+========================= */
+@media (max-width: 360px){
+
+  /* ---- Safety（副作用少なめ） ---- */
   html,
-  body {
+  body{
     overflow-x: hidden;
   }
 
   img,
   video,
   svg,
-  canvas {
+  canvas{
     max-width: 100%;
     height: auto;
   }
 
-  /* 長い英数字・URLなどだけ事故防止（anywhereは強すぎるので弱める） */
+  /* 長い英数字・URLなどだけ折り返し補助（強すぎない） */
   p,
   li,
   dd,
   dt,
   td,
-  th {
+  th{
     overflow-wrap: break-word;
     word-break: normal;
   }
 
-  /* もし “nowrap” ユーティリティを自分で付けた要素がある時だけ解除したいなら */
+  /* 自前でnowrapを付けた要素だけ解除したい場合 */
   .nowrap,
-  .no-wrap {
+  .no-wrap{
     white-space: normal !important;
   }
+
+  /* ---- Narrow overrides（〜360px） ---- */
+
+  /* Hero label */
+  .hero-label-text{
+    font-size: 18px;    /* 20 → 18 */
+    line-height: 1.25;
+  }
+
+  /* Section title（座布団） */
+  .section-title-bg{
+    font-size: 20px;      /* 例 */
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 4px 12px;    /* ←最終値 */
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* Early bird */
+  .early-bird-brand{
+    font-size: 20px;      /* 24 → 20 */
+    letter-spacing: 0.04em;
+  }
+
+  .early-bird-title{
+    font-size: 24px;      /* 30 → 24 */
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+  }
+
+  .early-bird-lead-top{
+    font-size: 14px;      /* 最終：18 → 14 */
+    letter-spacing: -0.04em;
+  }
+
+  .early-bird-highlight{
+    font-size: 16px;      /* 18 → 16 */
+    line-height: 1.35;
+    letter-spacing: -0.03em;
+  }
+
+  .early-bird-strong{
+    font-size: 20px;      /* 22 → 20 */
+    line-height: 1.15;
+  }
+
+  .early-bird-item-title{
+    font-size: 14px;      /* 最終：18 → 14 */
+  }
+
+  .early-bird-item-desc{
+    font-size: 13px;      /* 14 → 13 */
+    line-height: 1.25;
+  }
+
+  /* Price（先行価格ボックス） */
+  .price-sale{
+    padding: 8px 10px 6px;
+  }
+
+  .price-sale .price-label{
+    font-size: 22px;      /* 25 → 22 */
+  }
+
+  .price-sale .price-value{
+    font-size: 34px;      /* 40 → 34 */
+    letter-spacing: 0;    /* 改行の元を断つ */
+    white-space: nowrap;  /* 円を落とさない */
+  }
+
+  /* 通常価格 */
+  .price-regular .price-value{
+    font-size: 20px;
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .footer-tagline{
+    font-size: 16px;      /* 18 → 16 */
+    line-height: 1.45;
+  }
+
+  .footer-catch{
+    font-size: 18px;      /* 22 → 18 */
+    line-height: 1.45;
+    letter-spacing: -0.03em;
+  }
 }
+
+
+/* =========================
+  〜320px（最終微調整）
+========================= */
+@media (max-width: 320px){
+
+  /* Hero label */
+  .hero-label-text{
+    font-size: 17px;
+  }
+
+  /* Benefit */
+  .benefit-heading{
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .benefit-heading-line{
+    padding: 1px 5px 2px;
+  }
+
+  /* Safety text */
+  .safety-text{
+    font-size: 16px;   /* 18 → 16 */
+    line-height: 1.55;
+  }
+
+  /* Countdown */
+  .countdown-title{
+    font-size: 14px;   /* 18 → 14（コメント整合） */
+    line-height: 1.25;
+    padding: 4px 10px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Call now */
+  .call-now-inner{
+    padding-top: 66px; /* 58 → 66 */
+  }
+
+  .call-now-ribbon-text{
+    font-size: 18px;   /* 20 → 18 */
+    line-height: 1.1;
+    transform: translateY(-6px);
+  }
+
+  .call-now-ribbon-text span{
+    font-size: 14px;   /* 16 → 14 */
+    margin-top: 2px;
+  }
+
+  /* 期間（例：11/20まで） */
+  .call-now-period .t{
+    font-size: 14px;   /* 16 → 14 */
+  }
+
+  .call-now-period .n{
+    font-size: 20px;   /* 22 → 20 */
+  }
+
+  /* 受付時間（例：受付時間 9:00-18:00） */
+  .call-now-hours{
+    gap: 4px;               /* 6 → 4 */
+    letter-spacing: -0.10em;/* -0.08 → -0.10 */
+  }
+
+  .call-now-hours .info-label,
+  .call-now-hours .info-value{
+    font-size: 18px;        /* 20 → 18 */
+  }
+
+  .call-now-hours .info-label{
+    margin-right: 4px;      /* 6 → 4 */
+  }
+}
+
 
 
 
@@ -2258,87 +2427,111 @@ body{
     transform-origin: center;
   }
 
-  /* 座布団タイトル（SAFETYと同じ指示＝PCはサイズだけ） */
-  .usage-label{
-    display: block;          /* 念のためブロック化 */
-    width: 720px;
-    max-width: 100%;
-    margin-left: auto;       /* ← auto を左右に明示 */
-    margin-right: auto;
-    margin-top: 0;           /* h2のデフォ余白も止血 */
-    margin-bottom: 0;
+   /* 親幅を spaces/safety と同じにする（バーの見え幅も揃う） */
+  .usage-box{
+    width: min(92vw, 980px);
+    margin: 0 auto;
+    max-width: none; /* ← 1100が効いてたら無効化 */
   }
+
+  /* バーは親いっぱい（固定幅をやめる） */
+  .usage-label{
+    width: 100%;
+    margin: 0 0 28px;
+    padding: 4px 0;
+    font-size: 20px;
+    display: block;
+  }
+
 
 }
 
 /* =========================
-  SAFETY（PC）
+  SAFETY（PC）FINAL
+  - タイトル：spaces / usage と同じ横長バー
+  - 中身：拡大しない（画像荒れ防止）
+  - 2カラム：画像＆テキスト下揃え
   ※SPの後にそのまま貼る
 ========================= */
-
 @media (min-width: 768px){
 
   /* セクション全体 */
   .safety{
-    padding: 88px 24px;
+    padding: 56px 0 72px;   /* spacesと同じリズム */
     text-align: center;
   }
 
-  /* 外枠 */
+  /* ===== 外枠（タイトル幅を決める） ===== */
   .safety-box{
-    max-width: 900px;   /* USAGEとバランスを揃える */
+    width: min(92vw, 980px); /* usage / spaces と一致 */
     margin: 0 auto;
+    max-width: none;
   }
 
-  /* 座布団タイトル */
+  /* タイトルバー */
   .safety-label{
-    display: inline-block;
-    width: auto;
+    margin: 0 0 28px;
+    padding: 4px 0;
+    width: 100%;
+    display: block;
 
-    /* 横幅をしっかり確保 */
-    padding-left: 240px;
-    padding-right: 240px;
+    background: #1C2430;
+    color: #FBFBFB;
 
-    /* 縦を締める */
-    padding-top: 4px;
-    padding-bottom: 4px;
-    line-height: 1.2;
-
-    font-size: 18px;
-    margin: 0 auto;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    text-align: center;
   }
 
-  /* ===== 2カラム本体 ===== */
+  /* ===== 2カラム本体（中身は締める） ===== */
   .safety-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;              /* カラム間＋上下 */
-    max-width: 680px;       /* 中身はしっかり締める */
-    margin: 24px auto 0;
-  }
-
-  /* 各カード */
-  .safety-item{
-    margin: 0;              /* SPの余白はgridに任せる */
-  }
-
-  /* 画像 */
-  .safety-visual img{
-    width: 100%;
-    max-width: 320px;       /* SAFETYは控えめサイズ */
-    height: auto;
-    display: block;
+    gap: 44px;
+    max-width: 720px;      /* ← 中身の見え幅を制御（荒れ防止） */
     margin: 0 auto;
   }
 
-  /* テキスト（画像下） */
+  /* 各カード：下揃え */
+  .safety-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  /* 画像エリア：下揃え */
+  .safety-visual{
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* 画像：拡大させない */
+  .safety-visual img{
+    width: 100%;
+    height: auto;
+    max-width: 360px;      /* ← 画像の上限（320〜420で調整可） */
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  /* テキスト */
   .safety-text{
-    margin-top: 8px;
+    margin-top: 12px;
+    font-family: "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
     line-height: 1.7;
+    color: #1C2430;
     text-align: center;
   }
 
 }
+
 
 
 
@@ -2504,43 +2697,156 @@ body{
   User's Voice（PC）
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
-
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
   /* Section */
-  .user-voice {
-    padding: 56px 0 64px;
+  .user-voice{
+    padding: 56px 0 72px;
   }
 
-  /* Panel：横幅を広げて読みやすく */
-  .user-voice-inner {
-    width: min(900px, 92vw);
-    padding: 44px 28px 26px;
+  /* Panel（SPと同じ “1枚背景” 仕組み） */
+  .user-voice-inner{
+    position: relative;
+    width: min(92vw, 1100px);
+    margin: 0 auto;
+    padding: 44px 40px 36px;
+    background: transparent;
+  }
+  .user-voice-inner::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #F3F5F7;
+    z-index: 0;
+  }
+  .user-voice-inner > *{
+    position: relative;
+    z-index: 1;
   }
 
-  /* 背景の左右拡張：PCは広めに */
-  .user-voice-inner::before {
-    left: -40px;
-    right: -40px;
+  /* Title（中央・半分乗せ） */
+  .user-voice-title{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 8px 20px 9px;
+
+    background: #1C2430;
+    color: #FBFBFB;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    white-space: nowrap;
+    z-index: 3;
   }
 
-  /* Title（半分乗せ） */
-  .user-voice-title {
-    padding: 8px 18px 9px;
-    font-size: 20px;
+  /* List（PCはgrid） */
+  .user-voice-list{
+    display: grid;
+    gap: 28px 36px; /* row / column */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: start;
   }
 
-  /* item間の余白：PCは少しゆったり */
-  .user-voice-item {
-    padding: 18px 0;
+  /* SPの仕切り線はPCで非表示 */
+  .user-voice-divider{
+    display: none;
   }
 
-  /* Divider：見た目の薄さは維持（必要なら） */
-  .user-voice-divider {
-    transform: scaleY(0.5);
+  /* Item（1人分）
+     - gapで「lead ↔ body」の余白を管理（marginより事故らない）
+  */
+  .user-voice-item{
+    box-sizing: border-box;
+    min-height: 320px;
+    padding: 28px 24px 32px;
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* ←上下テキストの間（ここだけ触ればOK） */
   }
 
+  /* Head（Icon + Lead） */
+  .user-voice-head{
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 0; /* はみ出し保険 */
+  }
+
+  .user-voice-icon{
+    position: static;
+    width: 64px;
+    flex: 0 0 64px;
+    margin: 0;
+    order: 0; /* 常に左 */
+  }
+
+  /* SPで使ってた左右交互の余白をPCでは無効化 */
+  .user-voice-head.is-left .user-voice-lead,
+  .user-voice-head.is-right .user-voice-lead{
+    padding: 0;
+    text-align: left;
+  }
+
+  /* Lead（ゴールド） */
+  .user-voice-lead{
+    order: 1;     /* 常に右 */
+    flex: 1;
+    min-width: 0; /* はみ出し防止 */
+
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    color: #E3C46B;
+
+    margin: 0; /* gap管理にする */
+    white-space: normal;
+    overflow-wrap: anywhere; /* 長文でもカラム内に収める */
+    word-break: normal;
+    line-break: strict;
+    max-width: 100%;
+  }
+
+  /* Body（本文） */
+  .user-voice-body{
+    margin: 0; /* gap管理にする */
+    padding: 0;
+
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    color: #1C2430;
+  }
 }
+
+/* ノートPC幅：2カラム */
+@media (min-width: 768px) and (max-width: 1023px){
+  .user-voice-list{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .user-voice-item{
+    min-height: 300px;
+  }
+}
+
+/* 1024〜：3カラム */
+@media (min-width: 1024px){
+  .user-voice-list{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 
 
 
@@ -2716,7 +3022,7 @@ body{
   /* Ribbon text */
   .call-now-ribbon-text {
     font-size: 26px;
-    padding-top: 10px;
+    padding-top: 18px;
     transform: translateY(-6px);
   }
 
@@ -2732,11 +3038,12 @@ body{
   .call-now-price {
     gap: 48px;
     margin-top: 14px;
+    align-items: flex-end;
   }
 
   /* 通常価格ブロック：PCは下げすぎない */
   .price-item.price-regular {
-    margin-top: 18px;
+    margin-top: 0;
   }
 
   /* 通常価格 */
@@ -2755,7 +3062,8 @@ body{
 
   /* 先行価格 */
   .price-sale {
-    margin-bottom: 18px;
+    margin-bottom: 0;
+    transform: none;       /* ← SPの微調整を無効化 */
   }
 
   .price-sale .price-label {
@@ -2906,47 +3214,72 @@ body{
 
 
 /* =========================
-  CTA Fixed（PC）
-  - 余白は .page で管理（高さ120px想定）
-  - 白い余白を最小化
+  CTA Fixed（PC）FINAL
+  - PCではCTAを右下に常時固定
+  - SPの全幅fixed指定をPCで上書き
+  - page / body で余白管理はしない
+  ※ SP用CTA CSS の「後」に置く
 ========================= */
 
 @media (min-width: 768px){
 
-  :root{
-    --cta-h-pc: 120px; /* ← 実測120px */
-  }
+  /* =========================
+    レイアウト前提
+    - CTAは右下固定のため、下余白は不要
+  ========================= */
 
-  /* CTAに隠れない最低限の余白だけ確保 */
   .page{
-     padding-bottom: calc(var(--cta-h-pc) + 16px);
+    padding-bottom: 0 !important;
   }
 
-  /* footer自体は通常の見た目に戻す（SPのcalc影響を受けない） */
-  .site-footer{
-    padding: 44px 0;
+  body{
+    padding-bottom: 0 !important;
   }
 
-  /* CTA見た目（あなたの既存値そのまま） */
+  /* =========================
+    CTA 外枠（位置決め）
+  ========================= */
+
   .cta-fixed{
-    padding: 12px 12px;
-    padding-bottom: 12px;
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+
+    width: auto;
+    padding: 0;
+    background: transparent;
   }
+
+  /* =========================
+    CTA 中身（サイズ・構造）
+  ========================= */
 
   .cta-fixed__inner{
-    width: min(92vw, 520px);
-    padding-top: 18px;
+    width: 360px;          /* 360〜420pxで調整可 */
+    margin: 0;
+    padding-top: 18px;     /* バッジ分の逃げ */
   }
 
+  /* =========================
+    上部バッジ（PC微調整）
+  ========================= */
+
   .cta-fixed__badge{
-    font-size: 16px;
-    padding: 6px 54px;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    font-size: 15px;
+    padding: 6px 44px;
   }
+
+  /* =========================
+    CTAボタン本体
+  ========================= */
 
   .cta-fixed__btn{
     border-radius: 16px;
     padding: 18px 18px 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.16);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
   }
 
   .cta-fixed__icon{
@@ -2955,7 +3288,7 @@ body{
   }
 
   .cta-fixed__main{
-    font-size: 22px;
+    font-size: 20px;
     transform: translateY(-2px);
   }
 
@@ -2965,267 +3298,34 @@ body{
     gap: 12px;
   }
 
-}
+  /* =========================
+    Hover（PCのみ・任意）
+  ========================= */
 
-
-
-
-
-
-
-/* =========================
-  Narrow screen override（〜360px）
-========================= */
-@media (max-width: 360px) {
-
-  /* Hero label */
-  .hero-label-text {
-    font-size: 18px;
-    /* 20 → 18 */
-    line-height: 1.25;
-  }
-
-   .section-title-bg{
-    font-size: 20px;   /* 例 */
-    padding: 4px 14px; /* ←ここが超重要 */
-  }
-
-  .section-title-bg{
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 4px 12px;
-    text-align: center;
-    white-space: normal;
-  }
-
-  /* Early bird lead */
-  .early-bird-lead-top {
-    font-size: 16px;
-    /* 360でもこのサイズ */
-    letter-spacing: -0.04em;
-  }
-
-  /* 先行価格の箱を少しだけ詰める */
-  .price-sale{
-    padding: 8px 10px 6px;
-  }
-
-  /* ラベル（先行価格） */
-  .price-sale .price-label{
-    font-size: 22px; /* 25 → 22 */
-  }
-
-  /* 金額（ここが一番重要） */
-  .price-sale .price-value{
-    font-size: 34px;     /* 40 → 34 */
-    letter-spacing: 0;  /* ← 改行の元を断つ */
-    white-space: nowrap;/* 円を絶対に落とさない */
-  }
-
-  /* 通常価格も少しだけ縮める */
-  .price-regular .price-value{
-    font-size: 20px;
-    white-space: nowrap;
-  }
-
-  /* Early bird */
-  .early-bird-brand {
-    font-size: 20px;
-    /* 24 → 20 */
-    letter-spacing: 0.04em;
-  }
-
-  .early-bird-title {
-    font-size: 24px;
-    /* 30 → 24 */
-    line-height: 1.2;
-    letter-spacing: 0.03em;
-  }
-
-  .early-bird-lead-top {
-    font-size: 14px;
-    /* 18 → 14 */
-    letter-spacing: -0.04em;
-  }
-
-  .early-bird-highlight {
-    font-size: 16px;
-    /* 18 → 16 */
-    line-height: 1.35;
-    letter-spacing: -0.03em;
-  }
-
-  .early-bird-strong {
-    font-size: 20px;
-    /* 22 → 20 */
-    line-height: 1.15;
-  }
-
-  .early-bird-item-title {
-    font-size: 14px;
-    /* 18 → 16 */
-  }
-
-  .early-bird-item-desc {
-    font-size: 13px;
-    /* 14 → 13 */
-    line-height: 1.25;
-  }
-
-  /* Footer */
-  .footer-tagline {
-    font-size: 16px;
-    /* 18 → 16 */
-    line-height: 1.45;
-  }
-
-  .footer-catch {
-    font-size: 18px;
-    /* 22 → 18 */
-    line-height: 1.45;
-    letter-spacing: -0.03em;
-  }
-
-}
-
-
-/* =========================
-  Narrow screen override（〜320px）
-  ※ SP / PC / FV 全部の最終上書き
-========================= */
-@media (max-width: 320px) {
-
-  /* Hero label（さらに微調整） */
-  .hero-label-text {
-    font-size: 17px;
-  }
-
-  /* Benefit */
-  .benefit-heading {
-    font-size: 16px;
-    line-height: 1.3;
-  }
-
-  .benefit-heading-line {
-    padding: 1px 5px 2px;
-  }
-
-  /* Safety text */
-  .safety-text {
-    font-size: 16px;
-    /* 18 → 16 */
-    line-height: 1.55;
-  }
-
- 
-  /* Countdown */
-  .countdown-title {
-    font-size: 14px;
-    /* 18 → 16 */
-    line-height: 1.25;
-    padding: 4px 10px;
-    letter-spacing: -0.01em;
-  }
-
-  /* Call now */
-  .call-now-inner {
-    padding-top: 66px;
-    /* 58 → 66 */
-  }
-
-  .call-now-ribbon-text {
-    font-size: 18px;
-    /* 20 → 18 */
-    line-height: 1.1;
-    transform: translateY(-6px);
-  }
-
-  .call-now-ribbon-text span {
-    font-size: 14px;
-    /* 16 → 14 */
-    margin-top: 2px;
-  }
-
-  /* 期間（例：11/20まで） */
-  .call-now-period .t{
-    font-size: 14px; /* 16 → 14 */
-  }
-
-  .call-now-period .n{
-    font-size: 20px; /* 22 → 20 */
-  }
-
-  /* 受付時間（例：受付時間 9:00-18:00） */
-  .call-now-hours{
-    gap: 4px;          /* 6 → 4（詰めて横幅確保） */
-    letter-spacing: -0.10em; /* -0.08 → -0.10（微調整） */
-  }
-
-  .call-now-hours .info-label,
-  .call-now-hours .info-value{
-    font-size: 18px;   /* 20 → 18 */
-  }
-
-  .call-now-hours .info-label{
-    margin-right: 4px; /* 6 → 4 */
-  }
-
-  
-
-}
-
-/* ✅ 止血：PCの白余白の原因を強制上書き（最後に置く） */
-@media (min-width: 768px){
-  .page{
-    padding-bottom: 120px !important; /* CTA実測120 */
-  }
-  .site-footer{
-    padding-bottom: 44px !important;
+  .cta-fixed__btn:hover{
+    transform: translateY(-1px);
   }
 }
 
-/* =========================
-  CTA / Footer spacing FIX（最終止血）
-  - SP：footer で背景をCTA上まで伸ばす（pageは0）
-  - PC：pageで余白管理（footerは通常）
-  ※このブロックは CSSの一番最後に置く
-========================= */
 
-:root{
-  --cta-h-sp: 92px;
-  --cta-h-pc: 120px; /* あなたの実測 */
-}
 
-/* 共通：余計な下余白を作らない */
-body{ padding-bottom: 0 !important; }
 
-/* ===== SP（〜767）===== */
-@media (max-width: 767px){
 
-  /* SPは page に余白を入れない（入れると白が出やすい） */
-  .page{
-    padding-bottom: 0 !important;
-  }
 
-  /* SPは footer の背景を CTAの上まで伸ばす */
-  .site-footer{
-    padding-bottom: calc(22px + var(--cta-h-sp) + env(safe-area-inset-bottom)) !important;
-  }
-}
 
-/* ===== PC（768〜）===== */
-@media (min-width: 768px){
 
-  /* PCは page で余白管理（CTAに隠れない分だけ） */
-  .page{
-    padding-bottom: calc(var(--cta-h-pc) + 16px) !important;
-  }
 
-  /* PCのfooterは通常paddingに固定（SPのcalcを確実に殺す） */
-  .site-footer{
-    padding: 44px 0 !important;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
