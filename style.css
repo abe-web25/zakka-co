@@ -1757,47 +1757,50 @@ button.footer-link {
 
 
 /* =========================
-  CTA Fixed（SP）
+  CTA Fixed（SP）FINAL
+  - SPは footer にCTA分の余白を足して、背景を下まで伸ばす
+  - page / body には余白を付けない
 ========================= */
 
+/* 基本（SPのみの固定CTA運用） */
 html,
-body {
+body{
   height: 100%;
   overflow-x: hidden;
 }
 
-/* ✅ bodyには付けない */
-body {
+body{
   padding-bottom: 0;
 }
 
-/* ✅ コンテンツ側にだけ余白を持たせる */
-.page {
+.page{
   padding-bottom: 0;
 }
 
-/* 固定CTAの高さ（だいたい） */
-:root {
-  --cta-h: 92px;
-  /* あなたのCTAに合わせて調整 */
+/* 固定CTAの高さ（実測に合わせて） */
+:root{
+  --cta-h-sp: 92px;
 }
 
-/* footerの下に余白を追加して、CTAに隠れないようにする */
-.site-footer {
-  padding-bottom: calc(22px + var(--cta-h) + env(safe-area-inset-bottom));
+/* SP：footerの下に余白を追加して、CTAに隠れないようにする */
+@media (max-width: 767px){
+  .site-footer{
+    padding-bottom: calc(22px + var(--cta-h-sp) + env(safe-area-inset-bottom));
+  }
+
+  .page{
+    padding-bottom: calc(var(--cta-h-sp) + 22px + env(safe-area-inset-bottom));
+  }
 }
-
-
 
 /* =========================
   固定エリア
 ========================= */
-.cta-fixed {
+.cta-fixed{
   position: fixed;
   left: 0;
   right: 0;
 
-  /* iOS / Chrome 安定対策 */
   bottom: 0;
   bottom: calc(env(safe-area-inset-bottom) * 1);
 
@@ -1818,7 +1821,7 @@ body {
 /* =========================
   中央ラッパー
 ========================= */
-.cta-fixed__inner {
+.cta-fixed__inner{
   width: min(92vw, 360px);
   margin: 0 auto;
   position: relative;
@@ -1830,7 +1833,7 @@ body {
 /* =========================
   上部バッジ
 ========================= */
-.cta-fixed__badge {
+.cta-fixed__badge{
   position: absolute;
   top: 0;
   left: 50%;
@@ -1860,7 +1863,7 @@ body {
 /* =========================
   CTAボタン本体
 ========================= */
-.cta-fixed__btn {
+.cta-fixed__btn{
   display: block;
   position: relative;
   z-index: 1;
@@ -1874,7 +1877,7 @@ body {
 }
 
 /* 1行目（アイコン＋メイン文言） */
-.cta-fixed__btnrow {
+.cta-fixed__btnrow{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1882,14 +1885,14 @@ body {
 }
 
 /* アイコン */
-.cta-fixed__icon {
+.cta-fixed__icon{
   width: 18px;
   height: 18px;
   display: block;
 }
 
 /* メイン文言 */
-.cta-fixed__main {
+.cta-fixed__main{
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -1903,7 +1906,7 @@ body {
 /* =========================
   サブ情報
 ========================= */
-.cta-fixed__sub {
+.cta-fixed__sub{
   margin-top: 4px;
   display: flex;
   justify-content: center;
@@ -1918,16 +1921,18 @@ body {
 }
 
 .cta-fixed__hours,
-.cta-fixed__tel {
+.cta-fixed__tel{
   white-space: nowrap;
 }
 
 /* =========================
   タップ時フィードバック
 ========================= */
-.cta-fixed__btn:active {
+.cta-fixed__btn:active{
   transform: translateY(1px);
 }
+
+
 
 
 
@@ -2605,57 +2610,76 @@ body {
   ※SPの後にそのまま貼る（差分のみ）
 ========================= */
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
-  .spaces {
+  .spaces{
     padding: 56px 0 72px;
   }
 
-  .spaces-inner {
+  /* 中央幅：安定 */
+  .spaces-inner{
     width: min(92vw, 980px);
+    margin: 0 auto;
   }
 
   /* タイトル（座布団） */
-  .spaces-title {
+  .spaces-title{
     margin-bottom: 28px;
     font-size: 20px;
     padding: 4px 0;
   }
 
-  /* サイズ図：PCは余白を少し増やす */
-  .spaces-visual {
+  /* サイズ図 */
+  .spaces-visual{
     margin-bottom: 22px;
   }
 
-  /* スペック表：PCは字間詰めを緩める */
-  .spec-table {
+  .spaces-visual img{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+
+  /* ✅ ここが肝：画面内に収める */
+  max-height: 70vh;        /* 画面高の70%まで */
+  object-fit: contain;     /* はみ出さず縮小して全体表示 */
+}
+
+  /* ===== Spec Table ===== */
+
+  .spec-table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;       /* ← 折り返し・幅ブレを安定させる */
     letter-spacing: -0.01em;
   }
 
   .spec-table th,
-  .spec-table td {
+  .spec-table td{
     padding: 14px 14px;
+    vertical-align: top;       /* ← 行が伸びても見やすい */
   }
 
-  /* 左側項目 */
-  .spec-table th {
-    width: 28%;
-    /* PCは少し細くして右を広げる */
+  /* 左側：％より固定寄りが安定（長文で崩れにくい） */
+  .spec-table th{
+    width: 240px;              /* ← ここが肝：安定幅 */
     font-size: 15px;
     line-height: 1.45;
     padding-right: 10px;
   }
 
-  /* 右側テキスト */
-  .spec-table td {
+  /* 右側 */
+  .spec-table td{
     font-size: 17px;
     line-height: 1.7;
     padding-left: 18px;
+    word-break: break-word;    /* ← 長い単語/記号で崩れ防止 */
   }
 
-  /* 文字数が多い行だけ（PCも少し上げて読みやすく） */
+  /* 長文セルだけ（nth-child依存をやめるならここは消すのが理想）
+     ひとまず現状維持で残すならOK */
   .spec-table tbody tr:nth-child(6) td,
-  .spec-table tbody tr:nth-child(7) td {
+  .spec-table tbody tr:nth-child(7) td{
     font-size: 15px;
     line-height: 1.55;
     letter-spacing: -0.01em;
@@ -2835,9 +2859,7 @@ body {
 
 @media (min-width: 768px) {
 
-  .site-footer {
-    padding: 44px 0;
-  }
+  
 
   /* 中の箱：PCは広げる */
   .site-footer-inner {
@@ -2885,54 +2907,68 @@ body {
 
 /* =========================
   CTA Fixed（PC）
-  表示する場合の差分（SPの後に貼る）
+  - 余白は .page で管理（高さ120px想定）
+  - 白い余白を最小化
 ========================= */
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
-  /* PCでも固定するなら、コンテンツ下に余白を確保 */
-  .page {
-    padding-bottom: 110px;
+  :root{
+    --cta-h-pc: 120px; /* ← 実測120px */
   }
 
-  .cta-fixed {
+  /* CTAに隠れない最低限の余白だけ確保 */
+  .page{
+     padding-bottom: calc(var(--cta-h-pc) + 16px);
+  }
+
+  /* footer自体は通常の見た目に戻す（SPのcalc影響を受けない） */
+  .site-footer{
+    padding: 44px 0;
+  }
+
+  /* CTA見た目（あなたの既存値そのまま） */
+  .cta-fixed{
     padding: 12px 12px;
     padding-bottom: 12px;
   }
 
-  .cta-fixed__inner {
+  .cta-fixed__inner{
     width: min(92vw, 520px);
     padding-top: 18px;
   }
 
-  .cta-fixed__badge {
+  .cta-fixed__badge{
     font-size: 16px;
     padding: 6px 54px;
   }
 
-  .cta-fixed__btn {
+  .cta-fixed__btn{
     border-radius: 16px;
     padding: 18px 18px 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, .16);
+    box-shadow: 0 8px 20px rgba(0,0,0,.16);
   }
 
-  .cta-fixed__icon {
+  .cta-fixed__icon{
     width: 20px;
     height: 20px;
   }
 
-  .cta-fixed__main {
+  .cta-fixed__main{
     font-size: 22px;
     transform: translateY(-2px);
   }
 
-  .cta-fixed__sub {
+  .cta-fixed__sub{
     margin-top: 6px;
     font-size: 13px;
     gap: 12px;
   }
 
 }
+
+
+
 
 
 
@@ -3136,6 +3172,16 @@ body {
 
   
 
+}
+
+/* ✅ 止血：PCの白余白の原因を強制上書き（最後に置く） */
+@media (min-width: 768px){
+  .page{
+    padding-bottom: 120px !important; /* CTA実測120 */
+  }
+  .site-footer{
+    padding-bottom: 44px !important;
+  }
 }
 
 
