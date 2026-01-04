@@ -60,19 +60,21 @@ body {
   HERO（mobile-first / SP base）
 ========================= */
 
-.hero {
+.hero{
   position: relative;
   overflow: hidden;
 }
 
-/* 背景 */
-.hero-bg {
+/* =========================
+  Background
+========================= */
+.hero-bg{
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.hero-bg img {
+.hero-bg img{
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -80,24 +82,27 @@ body {
   display: block;
 }
 
-/* FVの基準（absoluteの基準になる） */
-.hero-inner {
+/* =========================
+  Inner（absoluteの基準）
+========================= */
+.hero-inner{
   position: relative;
   z-index: 1;
 
   max-width: 1100px;
   margin: 0 auto;
 
-  /* SP基準 */
-  height: 520px;   /* いったん固定 */
+  /* SP基準：いったん固定 */
+  height: 520px;
   padding: 12px 12px 16px;
 
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* 通常要素（relative） */
 .hero-label,
-.hero-main {
+.hero-main{
   position: relative;
   z-index: 5;
 }
@@ -105,21 +110,20 @@ body {
 /* 位置固定（absolute：FV内固定） */
 .hero-badges,
 .hero-campaign,
-.hero-brand {
+.hero-brand{
   position: absolute;
   z-index: 20;
 }
 
 /* =========================
-  上ラベル（SP）
+  Top label（SP）
 ========================= */
-
-.hero-label {
+.hero-label{
   box-sizing: border-box;
 
-  /* ✅ 中央寄せ（幅は中身に合わせる） */
   display: flex;
   justify-content: center;
+
   width: fit-content;
   max-width: 100%;
   margin: 0 auto 12px;
@@ -127,11 +131,11 @@ body {
   background: #1C2430;
   border-radius: 999px;
   padding: 5px 10px;
-
 }
 
-.hero-label-text {
+.hero-label-text{
   margin: 0;
+
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 500;
   font-size: 20px;
@@ -144,29 +148,30 @@ body {
 }
 
 /* =========================
-  メイン（SP：1カラム）
+  Main（SP：1カラム）
 ========================= */
-
-.hero-main {
+.hero-main{
   display: grid;
   grid-template-columns: 1fr;
   gap: 4px;
   align-items: start;
 
-  /* 追加調整（元コードの “全体を上げる” を統合） */
   padding-top: 10px;
-  transform: none;
   padding-left: 4px;
   padding-right: 4px;
+
+  transform: none;
 }
 
-/* タイトル（SP） */
-.hero-title {
-  margin: 0 0 6px; /* 上0 / 下6pxに固定 */
+/* Title（SP） */
+.hero-title{
+  margin: 0 0 6px;
+
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 40px;
-  
+  line-height: 1.25;
+
   color: #1C2430;
 
   -webkit-text-stroke: 1.5px #E3C46B;
@@ -175,26 +180,20 @@ body {
   position: relative;
   z-index: 6;
   max-width: 94%;
-  margin-bottom: 6px;
-  /* 8〜16pxで調整 */
-  line-height: 1.25;
 }
 
 /* =========================
-  人物（SP）
+  Visual（SP）
 ========================= */
-
-.hero-visual {
+.hero-visual{
   position: relative;
-  /* ← absoluteにしてたら戻す */
   margin: 0;
+
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  z-index: 6;
 
-  margin-top: 0;
-  
+  z-index: 6;
 }
 
 /* =========================
@@ -203,29 +202,24 @@ body {
 .hero-image{
   display: block;
   width: 100%;
-  max-width: 275px;        /* 巨大化防止 */
+  max-width: 275px;  /* 巨大化防止 */
   height: auto;
 
-  /* 位置微調整（確定値） */
+  /* SPの位置微調整（確定値） */
   transform: translateY(-240px) translateX(14px);
 
-  /* フェード設定 */
   opacity: 1;
   transition: opacity 1.4s ease-in-out;
 }
 
-/* フェード中 */
 .hero-image.is-fading{
   opacity: 0;
 }
 
-
-
 /* =========================
-  左バッジ（SP）
+  Badges（SP：left）
 ========================= */
-
-.hero-badges {
+.hero-badges{
   left: 12px;
   bottom: 264px;
 
@@ -238,7 +232,7 @@ body {
   padding: 0;
 }
 
-.hero-badge {
+.hero-badge{
   width: 84px;
   height: 84px;
 
@@ -251,107 +245,91 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+
   margin-bottom: -6px;
 }
 
-.hero-badge--30 {
+.hero-badge--30{
   background-image: url("images/hero-badge-guarantee-30.svg");
 }
 
-.hero-badge--1y {
+.hero-badge--1y{
   background-image: url("images/hero-badge-warranty-1y.svg");
 }
 
-/* 共通（フォント・色） */
 .hero-badge .badge-top,
-.hero-badge .badge-main {
+.hero-badge .badge-main{
   font-family: "Noto Serif JP", serif;
   font-weight: 700;
   color: #FBFBFB;
 }
 
-/* 30日満足保障：テキストだけ微調整 */
 .hero-badge--30 .badge-top,
-.hero-badge--30 .badge-main {
+.hero-badge--30 .badge-main{
   transform: translate(-2px, -2px);
 }
 
-/* 上段 */
-.badge-top {
+.badge-top{
   font-size: 14px;
   line-height: 1.05;
 }
 
-/* 下段 */
-.badge-main {
+.badge-main{
   font-size: 11px;
   line-height: 1.5;
   margin-top: 1px;
 }
 
 /* =========================
-  右下キャンペーン（SP）
+  Campaign badge（SP：right）
 ========================= */
-
-.hero-campaign {
+.hero-campaign{
   right: -14px;
   bottom: 258px;
+
   width: 132px;
   height: 126px;
+
   background-image: url("images/hero-badge-phone-only.svg");
   background-repeat: no-repeat;
   background-position: center;
-  /* ✅ 円だけ小さくする */
   background-size: contain;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+
   padding-top: 6px;
   box-sizing: border-box;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
-}
 
-.hero-campaign p {
-  margin: 0;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 500;
-  color: #FBFBFB;
-  text-align: center;
-}
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
 
-/* =========================
-  右下バッジ：テキスト制御（これに統一）
-========================= */
-
-/* 全体：基本 */
-.hero-campaign p {
-  margin: 0;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 500;
-  color: #FBFBFB;
-  text-align: center;
-}
-
-/* ---- 位置調整（ここだけ触ればOK） ---- */
-/* 上にしたい → マイナスを増やす（例：-2 → -6） */
-.hero-campaign {
+  /* テキスト位置調整（ここだけ触ればOK） */
   --note-y: -9px;
   --label-y: -8px;
   --price-y: -9px;
   --date-y: -8px;
 }
 
-/* ---- 電話注文限定 ---- */
-.campaign-note {
+.hero-campaign p{
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 500;
+  color: #FBFBFB;
+  text-align: center;
+}
+
+/* 電話注文限定 */
+.campaign-note{
   font-size: 9px;
   line-height: 1.2;
   transform: translateY(var(--note-y));
 }
 
-/* ---- 先行販売 ---- */
-.campaign-label {
+/* 先行販売 */
+.campaign-label{
   margin-top: 4px;
   font-size: 11px;
   font-weight: 600;
@@ -359,8 +337,8 @@ body {
   transform: translateY(var(--label-y));
 }
 
-/* ---- 5,000円OFF ---- */
-.campaign-price {
+/* 5,000円OFF */
+.campaign-price{
   margin-top: 6px;
   font-size: 20px;
   font-weight: 700;
@@ -368,31 +346,25 @@ body {
   transform: translateY(var(--price-y));
 }
 
-/* 5,000だけ字詰め */
-.price-num {
+.price-num{
   letter-spacing: -0.05em;
-  /* -0.02〜-0.05で調整 */
 }
 
-/* 円だけ小さく */
-.price-yen {
+.price-yen{
   font-size: 0.6em;
-  /* ここで調整OK */
   margin-left: 1px;
   vertical-align: baseline;
   display: inline-block;
 }
 
-/* OFF（必要なら微調整可能） */
-.price-off {
+.price-off{
   font-size: 0.8em;
-  /* ← OFFだけ小さくなる */
   margin-left: 1px;
   display: inline-block;
 }
 
-/* ---- 日付 ---- */
-.campaign-date {
+/* 日付 */
+.campaign-date{
   margin-top: 4px;
   font-size: 9px;
   line-height: 1.2;
@@ -400,10 +372,9 @@ body {
 }
 
 /* =========================
-  ブランド名（SP）
+  Brand（SP：right）
 ========================= */
-
-.hero-brand {
+.hero-brand{
   right: 2px;
   bottom: 255px;
   margin: 0;
@@ -411,15 +382,10 @@ body {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 12px;
-  letter-spacing: .08em;
-  color: rgba(28, 36, 48, 0.75);
+  letter-spacing: 0.08em;
+  color: rgba(28,36,48,0.75);
 }
 
-/* JSで付け外し */
-.hero-image.is-fading{
-  opacity: 0;
-  transition: opacity 0.9s ease;
-}
 
 
 
@@ -575,6 +541,7 @@ body {
 
 /* 座布団タイトル */
 .usage-label {
+  margin: 0;
   display: block;
   width: 100%;
   padding: 2px 0;
@@ -602,21 +569,26 @@ body {
 
 
 
+
+
+
 /* =========================
-   SAFETY
+  SAFETY（SP base）
 ========================= */
-.safety {
+
+.safety{
   padding: 64px 16px;
   text-align: center;
 }
 
-.safety-box {
+.safety-box{
   max-width: 720px;
   margin: 0 auto;
 }
 
 /* 座布団タイトル（usageと同じ） */
-.safety-label {
+.safety-label{
+  margin: 0; /* h2のデフォ余白を止血 */
   display: block;
   width: 100%;
   padding: 2px 0;
@@ -629,28 +601,36 @@ body {
   text-align: center;
 }
 
-/* 画像ブロック（基本の区切り） */
-.safety-visual {
-  margin: 32px 0 0;
+/* 新HTML：リスト（縦並び） */
+.safety-grid{
+  margin-top: 18px; /* タイトルに近づける（旧:first-of-type相当） */
 }
 
-/* 1枚目だけタイトルに近づける */
-.safety-visual:first-of-type {
-  margin-top: 18px;
+/* 1セット（画像＋テキスト） */
+.safety-item{
+  margin-top: 32px; /* 2個目以降の間隔 */
 }
 
-.safety-visual img {
+/* 1個目だけ詰める */
+.safety-item:first-child{
+  margin-top: 0;
+}
+
+/* 画像 */
+.safety-visual{
+  margin: 0; /* 余白は safety-item で管理 */
+}
+
+.safety-visual img{
   display: block;
-  width: auto;
-  /* 引き延ばし防止 */
-  max-width: 100%;
-  /* 画面より大きい時だけ縮む */
+  width: auto;      /* 引き延ばし防止 */
+  max-width: 100%;  /* 画面より大きい時だけ縮む */
   height: auto;
   margin: 0 auto;
 }
 
 /* 説明テキスト */
-.safety-text {
+.safety-text{
   margin-top: 6px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
@@ -658,6 +638,7 @@ body {
   line-height: 1.6;
   color: #1C2430;
 }
+
 
 
 
@@ -2030,109 +2011,160 @@ body {
 
 
 /* =========================
-  PC（768px〜）：差分だけ上書き
-  ※SP（デフォルト）を先に書いた後に貼る
+  HERO（PC 768px〜）override：統合版（これ1本だけ）
+  - 高さ微調整：--hero-tune
+  - 主役（タイトル＋人物）上下：--hero-shift
+  - SPの画像transformをPCで必ず解除（女性が動かない原因を潰す）
+  - バッジ/会社名：bottomで管理（CTAに隠れない）
+  - 1024px〜はサイズ等の“見た目だけ”
 ========================= */
 
+/* 768px〜（タブレット〜PC共通） */
 @media (min-width: 768px){
 
-  /* --- HERO全体の箱 --- */
-  .hero-inner{
-    height: min(780px, 92vh);
-    padding: 22px 24px 28px; /* PCは左右に少し余裕 */
+  /* absolute要素の基準を保証 */
+  .hero{
+    position: relative;
   }
 
-  /* --- 上のラベル（おすすめ・〜など） --- */
+  /* =========================
+    調整つまみ（ここだけ触ればOK）
+  ========================= */
+  :root{
+    --hero-tune: 8px;     /* FV高さの微調整（4/8/12など） */
+    --hero-shift: -30px;  /* 主役（タイトル＋人物）を上げる量（-24〜-60） */
+  }
+
+  /* =========================
+    HERO枠（SPのheight:520px固定を解除）
+  ========================= */
+  .hero-inner{
+    box-sizing: border-box;
+
+    height: calc(min(780px, 86vh) - var(--hero-tune));
+    min-height: calc(660px - var(--hero-tune));
+
+    /* 下固定CTAに隠れない安全地帯 */
+    padding: 22px 28px 180px;
+  }
+
+  /* =========================
+    主役：2カラム + 上下位置
+  ========================= */
+  .hero-main{
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+    align-items: center;
+    padding-top: 0;
+
+    transform: translateY(var(--hero-shift));
+    position: relative;
+    z-index: 30; /* バッジより前に */
+  }
+
+  /* 上ラベル（PC） */
   .hero-label{
     display: inline-block;
     width: auto;
     padding: 12px 18px;
-    margin-bottom: 18px;
+    margin-bottom: 2px;
   }
-
   .hero-label-text{
-    font-size: 20px;
-    white-space: nowrap; /* PCは1行維持 */
+    font-size: 18px;
+    white-space: nowrap;
   }
 
-  /* --- メイン2カラム --- */
-  .hero-main{
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 18px;
-    align-items: start;
-    padding-top: 10px;
-
-    /* PCだけ全体を少し上げる（SPの値があるなら上書き） */
-    transform: translateY(-40px);
-  }
-
-  /* --- 見出し --- */
+  /* タイトル（PC） */
   .hero-title{
-    font-size: 56px;
+    font-size: 52px;
+    line-height: 1.05;
     -webkit-text-stroke: 2px #E3C46B;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.18);
+    margin-top: 0 !important;     /* ←デフォルトh1余白を殺す */
+    margin-bottom: 0;             /* 必要なら（下が詰まりすぎなら戻す） */
+    padding-top: 0;               /* 念のため */
+    line-height: 1.05;
   }
 
-  /* --- 画像側 --- */
+  /* ✅ もしタイトルがp等で包まれてるなら保険 */
+  .hero-copy > *:first-child{
+    margin-top: 0 !important;
+  }
+
+  .hero-main{ padding-top: 0 !important; }
+
+  /* =========================
+    人物（PC）
+  ========================= */
   .hero-visual{
     justify-content: flex-end;
     margin-top: 0;
-
-    /* 画像ブロックだけ少し上げる */
-    transform: translateY(-24px);
   }
 
+  /* ✅ SPで入ってる transform をPCで必ず解除 */
   .hero-image{
-    max-width: 480px;
-    transform: none; /* SPでtransformしてたらPCは解除 */
+    transform: none;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
   }
 
-  /* --- 左下バッジ群 --- */
+  /* 背景：床感（必要なら） */
+  .hero-bg img{
+    object-position: center 90%;
+  }
+
+  /* =========================
+    バッジ / 会社名（CTAに隠れない）
+  ========================= */
   .hero-badges{
-    left: 18px;
-    bottom: 34px;
+    left: 24px;
+    bottom: 150px;
     gap: 14px;
+    z-index: 20;
   }
 
   .hero-badge{
-    width: 110px;
-    height: 110px;
+    width: 112px;
+    height: 112px;
   }
+  .badge-top{ font-size: 18px; }
+  .badge-main{ font-size: 13px; }
 
-  .badge-top{
-    font-size: 18px;
-  }
-
-  .badge-main{
-    font-size: 13px;
-  }
-
-  /* --- 右下キャンペーン丸 --- */
   .hero-campaign{
-    right: 18px;
-    bottom: 18px;
+    right: 24px;
+    bottom: 156px;
     width: 150px;
     height: 150px;
+    z-index: 20;
   }
+  .campaign-note{ font-size: 12px; }
+  .campaign-price{ font-size: 26px; }
+  .campaign-date{ font-size: 12px; }
 
-  .campaign-note{
-    font-size: 12px;
-  }
-
-  .campaign-price{
-    font-size: 26px;
-  }
-
-  .campaign-date{
-    font-size: 12px;
-  }
-
-  /* --- 右下ブランド名（会社名） --- */
   .hero-brand{
-    right: 18px;
-    bottom: 6px;
-  }
+    position: absolute;
+    right: 24px;
+    bottom: 132px;
+    z-index: 25;
 
+    /* 消えてた件の止血 */
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
 }
+
+/* 1024px〜（PC最適化：見た目だけ） */
+@media (min-width: 1024px){
+  .hero-title{ font-size: 56px; }
+  .hero-image{ max-width: 560px; }
+}
+
+
+
+
+
 
 /* =========================
   BENEFIT（PC 768px〜）
@@ -2153,7 +2185,7 @@ body {
 
   /* 一覧：PCは2カラムで見やすく */
   .benefit-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 28px;
   }
 
@@ -2167,7 +2199,7 @@ body {
     top: 64px;
     gap: 10px;
     width: calc(100% - 48px);
-    max-width: 460px;
+    max-width: 360px;
   }
 
   /* POINT（座布団） */
@@ -2179,8 +2211,8 @@ body {
 
   /* 見出し本体 */
   .benefit-heading {
-    font-size: 26px;
-    line-height: 1.32;
+    font-size: 20px;
+    line-height: 1.3;
   }
 
   /* 見出し：1行ごとの座布団 */
@@ -2191,46 +2223,128 @@ body {
 }
 
 
+
+
+  
+/* =========================
+  USAGE（PC）
+  ※SPの後にそのまま貼る（差分のみ）
+========================= */
+
+@media (min-width: 768px){
+
+  /* 画像ブロック */
+  .usage-visual{
+    margin-top: 48px;
+  }
+
+  .usage-visual:first-of-type{
+    margin-top: 22px;
+  }
+
+  /* 使用イメージ画像 */
+  .usage-visual img{
+    width: min(520px, 100%);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+
+    transform: translateY(18px) scale(1.16);
+    transform-origin: center;
+  }
+
+  /* 座布団タイトル（SAFETYと同じ指示＝PCはサイズだけ） */
+  .usage-label{
+    display: block;          /* 念のためブロック化 */
+    width: 720px;
+    max-width: 100%;
+    margin-left: auto;       /* ← auto を左右に明示 */
+    margin-right: auto;
+    margin-top: 0;           /* h2のデフォ余白も止血 */
+    margin-bottom: 0;
+  }
+
+}
+
 /* =========================
   SAFETY（PC）
   ※SPの後にそのまま貼る
 ========================= */
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
-  .safety {
+  /* セクション全体 */
+  .safety{
     padding: 88px 24px;
-    /* PCは縦の余白をしっかり */
+    text-align: center;
   }
 
-  .safety-box {
-    max-width: 720px;
-    /* SPと同じでOK */
+  /* 外枠 */
+  .safety-box{
+    max-width: 900px;   /* USAGEとバランスを揃える */
+    margin: 0 auto;
   }
 
   /* 座布団タイトル */
-  .safety-label {
+  .safety-label{
+    display: inline-block;
+    width: auto;
+
+    /* 横幅をしっかり確保 */
+    padding-left: 240px;
+    padding-right: 240px;
+
+    /* 縦を締める */
+    padding-top: 4px;
+    padding-bottom: 4px;
+    line-height: 1.2;
+
     font-size: 18px;
-    /* SPと同じ（完成してる） */
+    margin: 0 auto;
   }
 
-  /* 画像ブロック */
-  .safety-visual {
-    margin-top: 36px;
+  /* ===== 2カラム本体 ===== */
+  .safety-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;              /* カラム間＋上下 */
+    max-width: 680px;       /* 中身はしっかり締める */
+    margin: 24px auto 0;
   }
 
-  .safety-visual:first-of-type {
-    margin-top: 22px;
+  /* 各カード */
+  .safety-item{
+    margin: 0;              /* SPの余白はgridに任せる */
   }
 
-  /* 説明テキスト */
-  .safety-text {
+  /* 画像 */
+  .safety-visual img{
+    width: 100%;
+    max-width: 320px;       /* SAFETYは控えめサイズ */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* テキスト（画像下） */
+  .safety-text{
     margin-top: 8px;
     line-height: 1.7;
-    /* PCは少しだけ読みやすく */
+    text-align: center;
   }
 
 }
+
+
+
+
+
+
+
+
+  
+  
+
 
 
 /* =========================
@@ -3023,3 +3137,8 @@ body {
   
 
 }
+
+
+
+
+
