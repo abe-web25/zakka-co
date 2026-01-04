@@ -2185,32 +2185,43 @@ body{
 
 
 /* =========================
-  HERO（PC 768px〜）override：統合版（これ1本だけ）
-  - 高さ微調整：--hero-tune
-  - 主役（タイトル＋人物）上下：--hero-shift
-  - SPの画像transformをPCで必ず解除（女性が動かない原因を潰す）
-  - バッジ/会社名：bottomで管理（CTAに隠れない）
-  - 1024px〜はサイズ等の“見た目だけ”
+  HERO（PC 768px〜）override：独立調整版（これ1本）
+  - タイトル / 画像 / 左メダル / 右メダル / 会社名 を個別に動かせる
 ========================= */
 
-/* 768px〜（タブレット〜PC共通） */
 @media (min-width: 768px){
-
-  /* absolute要素の基準を保証 */
-  .hero{
-    position: relative;
-  }
 
   /* =========================
     調整つまみ（ここだけ触ればOK）
   ========================= */
   :root{
-    --hero-tune: 8px;     /* FV高さの微調整（4/8/12など） */
-    --hero-shift: -30px;  /* 主役（タイトル＋人物）を上げる量（-24〜-60） */
+    /* FV高さ */
+    --hero-tune: 8px;
+
+    /* タイトル（hero-copy側） */
+    --copy-shift-y: -26px;
+    --copy-shift-x: 0px;
+
+    /* 女性画像（hero-visual側） */
+    --image-shift-y: -10px;
+    --image-shift-x: 0px;
+    --image-max-w: 380px;
+
+    /* 左メダル（hero-badges） */
+    --badges-left: 24px;
+    --badges-bottom: 150px;
+
+    /* 右メダル（hero-campaign） */
+    --campaign-right: 24px;
+    --campaign-bottom: 156px;
+
+    /* 会社名（hero-brand） */
+    --brand-right: 24px;
+    --brand-bottom: 132px;
   }
 
   /* =========================
-    HERO枠（SPのheight:520px固定を解除）
+    HERO枠（SPのheight固定を解除）
   ========================= */
   .hero-inner{
     box-sizing: border-box;
@@ -2220,84 +2231,98 @@ body{
 
     /* 下固定CTAに隠れない安全地帯 */
     padding: 22px 28px 180px;
+
+    position: relative; /* absolute基準の最終保険 */
   }
 
   /* =========================
-    主役：2カラム + 上下位置
+    2カラム化（ここはレイアウトのみ）
   ========================= */
   .hero-main{
+    display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 20px;
     align-items: center;
-    padding-top: 0;
 
-    transform: translateY(var(--hero-shift));
+    padding-top: 0;
+    transform: none;          /* ✅ まとめて動かさない */
     position: relative;
-    z-index: 30; /* バッジより前に */
+    z-index: 30;
   }
 
-  /* 上ラベル（PC） */
+  /* =========================
+    上ラベル（PC）
+  ========================= */
   .hero-label{
     display: inline-block;
     width: auto;
     padding: 12px 18px;
-    margin-bottom: 2px;
+    margin: 0 auto 2px;
   }
   .hero-label-text{
     font-size: 18px;
     white-space: nowrap;
   }
 
-  /* タイトル（PC） */
+  /* =========================
+    タイトル（hero-copy側だけ動かす）
+  ========================= */
+  .hero-copy{
+    position: relative;
+    transform: translate(var(--copy-shift-x), var(--copy-shift-y));
+  }
+
   .hero-title{
     font-size: 52px;
     line-height: 1.05;
     -webkit-text-stroke: 2px #E3C46B;
+    paint-order: stroke fill;
     text-shadow: 0 2px 0 rgba(0,0,0,0.18);
-    margin-top: 0 !important;     /* ←デフォルトh1余白を殺す */
-    margin-bottom: 0;             /* 必要なら（下が詰まりすぎなら戻す） */
-    padding-top: 0;               /* 念のため */
-    line-height: 1.05;
-  }
 
-  /* ✅ もしタイトルがp等で包まれてるなら保険 */
-  .hero-copy > *:first-child{
-    margin-top: 0 !important;
+    margin: 0;          /* ✅ h1の余白を殺す */
+    padding: 0;
+    max-width: 100%;
   }
-
-  .hero-main{ padding-top: 0 !important; }
 
   /* =========================
-    人物（PC）
+    女性画像（hero-visual側だけ動かす）
   ========================= */
   .hero-visual{
+    position: relative;
+    margin: 0;
+    display: flex;
     justify-content: flex-end;
-    margin-top: 0;
+    align-items: flex-end;
+
+    transform: translate(var(--image-shift-x), var(--image-shift-y));
   }
 
   /* ✅ SPで入ってる transform をPCで必ず解除 */
   .hero-image{
     transform: none;
     width: 100%;
-    max-width: 520px;
+    max-width: var(--image-max-w);
     height: auto;
+    display: block;
   }
 
-  /* 背景：床感（必要なら） */
+  /* 背景の床感（必要なら） */
   .hero-bg img{
-    object-position: center 90%;
+    object-fit: contain;         /* ← 収める（寄らない） */
+    object-position: center 90%; /* 床側を見せるなら下寄せ */
+    background: #F8F2DF;            /* 余白が出るので背景色で埋める（色は好み） */
   }
 
   /* =========================
-    バッジ / 会社名（CTAに隠れない）
+    左メダル（独立）
   ========================= */
   .hero-badges{
-    left: 24px;
-    bottom: 150px;
+    left: var(--badges-left);
+    bottom: var(--badges-bottom);
+
     gap: 14px;
     z-index: 20;
   }
-
   .hero-badge{
     width: 112px;
     height: 112px;
@@ -2305,36 +2330,44 @@ body{
   .badge-top{ font-size: 18px; }
   .badge-main{ font-size: 13px; }
 
+  /* =========================
+    右メダル（独立）
+  ========================= */
   .hero-campaign{
-    right: 24px;
-    bottom: 156px;
+    right: var(--campaign-right);
+    bottom: var(--campaign-bottom);
+
     width: 150px;
     height: 150px;
     z-index: 20;
   }
   .campaign-note{ font-size: 12px; }
+  .campaign-label{ font-size: 13px; }
   .campaign-price{ font-size: 26px; }
   .campaign-date{ font-size: 12px; }
 
+  /* =========================
+    会社名（独立）
+  ========================= */
   .hero-brand{
     position: absolute;
-    right: 24px;
-    bottom: 132px;
+    right: var(--brand-right);
+    bottom: var(--brand-bottom);
     z-index: 25;
 
-    /* 消えてた件の止血 */
     display: block;
     visibility: visible;
     opacity: 1;
+
+    font-size: 13px; /* 好みで */
   }
 }
 
-/* 1024px〜（PC最適化：見た目だけ） */
+/* 1024px〜（見た目だけ） */
 @media (min-width: 1024px){
   .hero-title{ font-size: 56px; }
-  .hero-image{ max-width: 560px; }
+  :root{ --image-max-w: 560px; }
 }
-
 
 
 
