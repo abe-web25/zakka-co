@@ -3184,6 +3184,50 @@ body{
   }
 }
 
+/* =========================
+  CTA / Footer spacing FIX（最終止血）
+  - SP：footer で背景をCTA上まで伸ばす（pageは0）
+  - PC：pageで余白管理（footerは通常）
+  ※このブロックは CSSの一番最後に置く
+========================= */
+
+:root{
+  --cta-h-sp: 92px;
+  --cta-h-pc: 120px; /* あなたの実測 */
+}
+
+/* 共通：余計な下余白を作らない */
+body{ padding-bottom: 0 !important; }
+
+/* ===== SP（〜767）===== */
+@media (max-width: 767px){
+
+  /* SPは page に余白を入れない（入れると白が出やすい） */
+  .page{
+    padding-bottom: 0 !important;
+  }
+
+  /* SPは footer の背景を CTAの上まで伸ばす */
+  .site-footer{
+    padding-bottom: calc(22px + var(--cta-h-sp) + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* ===== PC（768〜）===== */
+@media (min-width: 768px){
+
+  /* PCは page で余白管理（CTAに隠れない分だけ） */
+  .page{
+    padding-bottom: calc(var(--cta-h-pc) + 16px) !important;
+  }
+
+  /* PCのfooterは通常paddingに固定（SPのcalcを確実に殺す） */
+  .site-footer{
+    padding: 44px 0 !important;
+  }
+}
+
+
 
 
 
