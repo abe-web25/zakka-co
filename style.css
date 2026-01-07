@@ -605,12 +605,14 @@ body {
 
 /* figureのブラウザ標準余白をリセット（左右40px対策） */
 .usage-visual {
-  margin: 32px 0 0; /* 上のみ余白 */
+  margin: 12px 0 0;
+  /* 上のみ余白 */
 }
 
 /* 画像本体 */
 .usage-visual img {
-  display: block;      /* inline画像の余白対策 */
+  display: block;
+  /* inline画像の余白対策 */
   width: 100%;
   height: auto;
   transform: none;
@@ -656,7 +658,7 @@ body {
 
 /* 新HTML：リスト（縦並び） */
 .safety-grid {
-  margin-top: 18px;
+  margin-top: 10px;
   /* タイトルに近づける（旧:first-of-type相当） */
 }
 
@@ -2275,72 +2277,134 @@ body {
 
 /* =========================
   HERO（PC 768px〜）override：独立調整版（これ1本）
-  - タイトル / 画像 / 左メダル / 右メダル / 会社名 を個別に動かせる
+  - 背景：左右だけ薄オレンジ / 紺オーバーレイ
+  - FV高さ：CTA分だけ短く（微調整可）
+  - タイトル / 画像 / 左バッジ2つ / 右バッジ / 会社名 を個別に動かせる
+  ※ このブロックをCSSのいちばん最後に貼る
 ========================= */
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
   /* =========================
     調整つまみ（ここだけ触ればOK）
   ========================= */
-  :root {
-    /* FV高さ */
+  :root{
+    /* 背景：左右の薄オレンジ量（小さいほど画像が広がる） */
+    --bg-x-pad: 120px;
+
+    /* 背景：紺オーバーレイ */
+    --bg-overlay-color: rgba(28, 36, 48, 0.35); /* 0.25〜0.45 */
+
+    /* FV高さ（固定CTAぶん） */
+    --cta-fixed-h: 84px;
     --hero-tune: 8px;
 
-    /* タイトル（hero-copy側） */
-    --copy-shift-y: 0px;
-    --copy-shift-x: 0px;
+    /* hero-inner（左右の余白） */
+    --inner-pad-x: 10px;
+    --inner-pad-top: 18px;
 
-    /* タイトル単独調整 */
-    --title-shift-y: -160px;
-    --title-shift-x: 160px;
+    /* タイトル（hero-copy側） */
+    --copy-shift-x: 0px;
+    --copy-shift-y: 0px;
+
+    /* タイトル単体 */
+    --title-shift-x: 140px;
+    --title-shift-y: -120px;
 
     /* 女性画像（hero-visual側） */
-    --image-shift-y: -10px;
     --image-shift-x: -120px;
-    --image-max-w: 380px;
+    --image-shift-y: -50px;
+    --image-max-w: 340px;
 
-    /* 左メダル（hero-badges） */
-    --badges-left: 44px;
-    --badges-bottom: -140px;
+    /* 左バッジ（かたまり） */
+    --badges-left: 80px;
+    --badges-bottom: -122px;
+    --badges-gap: 20px;
 
-    /* 右メダル（hero-campaign） */
-    --campaign-right: -22px;
-    --campaign-bottom: 100px;
+    /* 左バッジ単体（30日 / 1年） */
+    --badge30-x: 0px;
+    --badge30-y: 0px;
+    --badge1y-x: 0px;
+    --badge1y-y: -10px;
+
+    /* 右バッジ（hero-campaign） */
+    --campaign-right: 500px;
+    --campaign-bottom: 72px;
 
     /* 会社名（hero-brand） */
-    --brand-right: 20px;
+    --brand-right: -12px;
     --brand-bottom: 80px;
   }
 
   /* =========================
     HERO枠（SPのheight固定を解除）
   ========================= */
-  .hero-inner {
+  .hero-inner{
     box-sizing: border-box;
 
-    height: calc(min(780px, 86vh) - var(--hero-tune));
-    min-height: calc(660px - var(--hero-tune));
+    height: calc(min(780px, 86vh) - var(--hero-tune) - var(--cta-fixed-h));
+    min-height: calc(660px - var(--hero-tune) - var(--cta-fixed-h));
 
-    /* 下固定CTAに隠れない安全地帯 */
-    padding: 22px 28px 180px;
+    padding-top: var(--inner-pad-top);
+    padding-left: var(--inner-pad-x);
+    padding-right: var(--inner-pad-x);
+    padding-bottom: calc(24px + var(--cta-fixed-h));
 
-    position: relative;
-    /* absolute基準の最終保険 */
+    position: relative; /* absolute基準 */
   }
 
   /* =========================
-    2カラム化（ここはレイアウトのみ）
+    背景（薄オレンジ＋左右だけ余白＋紺オーバーレイ）
   ========================= */
-  .hero-main {
+  .hero-bg{
+    background: var(--bg-color);
+    position: absolute;
+    inset: 0;
+  }
+
+  /* 左右の余白を作る枠は picture に持たせる */
+  .hero-bg picture{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--bg-x-pad);
+    right: var(--bg-x-pad);
+    z-index: 1;
+  }
+
+  /* 画像は枠の中を100%で埋める */
+  .hero-bg img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center var(--bg-pos-y);
+  }
+
+  /* 紺オーバーレイ（hero-bg全体にかける） */
+  .hero-bg::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--bg-overlay-color);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* =========================
+    2カラム（レイアウトのみ）
+  ========================= */
+  .hero-main{
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 2px;
     align-items: center;
 
     padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+
     transform: none;
-    /* ✅ まとめて動かさない */
     position: relative;
     z-index: 30;
   }
@@ -2348,57 +2412,58 @@ body {
   /* =========================
     上ラベル（PC）
   ========================= */
-  .hero-label {
+  .hero-label{
     display: inline-block;
     width: auto;
     padding: 14px 24px;
     margin: 0 auto 2px;
-    transform: translate(60px, 40px);
+    transform: translate(60px, 30px);
   }
 
-  .hero-label-text {
+  .hero-label-text{
     font-size: 24px;
     white-space: nowrap;
   }
 
-  /* =========================
-    タイトル（hero-copy側だけ動かす）
-  ========================= */
-  .hero-copy {
-    position: relative;
-    transform: translate(var(--copy-shift-x), var(--copy-shift-y));
-  }
-
-  .hero-title {
-    font-size: 60px;
-    line-height: 1.4;
-    -webkit-text-stroke: 2px #E3C46B;
-    paint-order: stroke fill;
-    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
-
-    margin: 0;
-    /* ✅ h1の余白を殺す */
-    padding: 0;
-    max-width: 100%;
-
-    transform: translate(var(--title-shift-x), var(--title-shift-y));
-  }
-
-  .br-sp {
-    display: none;
-  }
-
-  .br-pc {
-    display: inline;
-  }
-
+  /* 改行制御 */
+  .br-sp{ display: none; }
+  .br-pc{ display: inline; }
 
   /* =========================
-    女性画像（hero-visual側だけ動かす）
+  タイトル（独立・ぷっくり調整）
+========================= */
+.hero-copy{
+  position: relative;
+  transform: translate(var(--copy-shift-x), var(--copy-shift-y));
+}
+
+.hero-title{
+  font-size: 64px;
+  line-height: 1.4;
+
+  /* ① 縁取りを少しだけ太く */
+  -webkit-text-stroke: 2.5px #E3C46B;
+  paint-order: stroke fill;
+
+  /* ② ぷっくり感を出す影を重ねる */
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.18),   /* 今までの影 */
+    0 4px 6px rgba(0,0,0,0.18); /* 下方向の厚み */
+
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+
+  transform: translate(var(--title-shift-x), var(--title-shift-y));
+}
+
+  /* =========================
+    女性画像（独立）
   ========================= */
-  .hero-visual {
+  .hero-visual{
     position: relative;
     margin: 0;
+
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -2406,8 +2471,8 @@ body {
     transform: translate(var(--image-shift-x), var(--image-shift-y));
   }
 
-  /* ✅ SPで入ってる transform をPCで必ず解除 */
-  .hero-image {
+  /* SPのtransformをPCで解除 */
+  .hero-image{
     transform: none;
     width: 100%;
     max-width: var(--image-max-w);
@@ -2415,96 +2480,67 @@ body {
     display: block;
   }
 
-  /* 背景の床感（必要なら） */
-  .hero-bg img {
-    object-fit: contain;
-    /* ← 収める（寄らない） */
-    object-position: center 90%;
-    /* 床側を見せるなら下寄せ */
-    background: #F8F2DF;
-    /* 余白が出るので背景色で埋める（色は好み） */
-  }
-
   /* =========================
-    左メダル（独立）
+    左バッジ（独立 / 横並び）
   ========================= */
-  /* 左メダルをタイトルから独立させる */
-  .hero-badges {
+  .hero-badges{
     position: absolute;
     left: var(--badges-left);
     bottom: var(--badges-bottom);
     z-index: 20;
 
     display: flex;
-    flex-direction: column;
-    gap: 14px;
+    flex-direction: row;
+    gap: var(--badges-gap);
+    align-items: flex-start;
+
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .hero-badge {
+  .hero-badge{
     width: 148px;
     height: 148px;
+    margin: 0;
+    position: relative;
+    transform: translate(0,0);
   }
 
-  /* 上段（30日 / 1年） */
-  .hero-badge .badge-top {
-    line-height: 1;
+  .hero-badge--30{
+    transform: translate(var(--badge30-x), var(--badge30-y));
   }
 
-  /* 数字だけ大きく */
-  .hero-badge .badge-num {
-    font-size: 30px;
-    /* ← 好みで調整 */
-    font-weight: 700;
+  .hero-badge--1y{
+    transform: translate(var(--badge1y-x), var(--badge1y-y));
   }
 
-  /* 単位（日・年）は控えめ */
-  .hero-badge .badge-unit {
-    font-size: 18px;
-    margin-left: 2px;
-  }
-
-  /* 下段テキスト */
-  .hero-badge .badge-main {
-    font-size: 20px;
-  }
+  /* 左バッジ文字（PC） */
+  .hero-badge .badge-top{ line-height: 1; }
+  .hero-badge .badge-num{ font-size: 30px; font-weight: 700; }
+  .hero-badge .badge-unit{ font-size: 18px; margin-left: 2px; }
+  .hero-badge .badge-main{ font-size: 20px; }
 
   /* =========================
-  右メダル（独立 / PC）
-========================= */
-  .hero-campaign {
+    右バッジ（独立 / PC）
+  ========================= */
+  .hero-campaign{
     right: var(--campaign-right);
     bottom: var(--campaign-bottom);
-
-    width: 220px;
-    height: 220px;
+    width: 148px;
+    height: 148px;
     z-index: 20;
   }
 
-  /* 中の文字（PC） */
-  .hero-campaign .campaign-note {
-    font-size: 16px;
-  }
-
-  .hero-campaign .campaign-label {
-    font-size: 17px;
-  }
-
-  .hero-campaign .campaign-price {
-    font-size: 30px;
-  }
-
-  .hero-campaign .campaign-date {
-    font-size: 15px;
-  }
-
+  .hero-campaign .campaign-note{ font-size: 13px; }
+  .hero-campaign .campaign-label{ font-size: 13px; }
+  .hero-campaign .campaign-price{ font-size: 22px; }
+  .hero-campaign .campaign-date{ font-size: 13px; }
 
   /* =========================
     会社名（独立）
   ========================= */
-  .hero-brand {
+  .hero-brand{
     position: absolute;
     right: var(--brand-right);
     bottom: var(--brand-bottom);
@@ -2516,10 +2552,10 @@ body {
 
     font-size: 16px;
     letter-spacing: 0.1em;
-    /* 少し広げると読みやすい */
-
   }
+
 }
+
 
 
 
@@ -3423,108 +3459,66 @@ body {
 
 
 /* =========================
-  CTA Fixed（PC）FINAL + FV中央切替
-  - FV（#hero）内：中央下固定
-  - FV過ぎ：右下固定
-  - SPの全幅fixed指定をPCで上書き
+  CTA Fixed（PC）FINAL
+  - PCも下部中央固定（動かさない）
+  - 位置切替（is-center / is-right）は使わない
+  - SPのレイアウト（left:0; right:0; bottom:0）をそのまま活かし、
+    見た目だけPCで微調整
   ※ SP用CTA CSS の「後」に置く
 ========================= */
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
-  /* ✅ page/bodyで余白管理はしない（あなたの方針のまま） */
-  .page {
-    padding-bottom: 0 !important;
-  }
+  /* ✅ 余計な下余白を作らない（残っている場合の保険） */
+  .page{ padding-bottom: 0 !important; }
+  body{ padding-bottom: 0 !important; }
 
-  body {
-    padding-bottom: 0 !important;
-  }
+  /* ✅ 位置はいじらない（SPの全幅下固定を維持）
+     ※ .cta-fixed 自体は触らないのが安全 */
 
   /* =========================
-    CTA 外枠（位置決め）
-    - PCでは「中央 or 右下」をクラスで切替
+    中身（幅だけPC向けに）
   ========================= */
-
-  .cta-fixed {
-    left: auto !important;
-    right: auto !important;
-    transform: none !important;
-  }
-
-  /* FV中：中央 */
-  .cta-fixed.is-center {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-  }
-
-  /* FV過ぎ：右下 */
-  .cta-fixed.is-right {
-    right: 24px !important;
-    left: auto !important;
-    transform: none !important;
-  }
-
-  /* JS未読み込み等の保険：初期は右下 */
-  .cta-fixed:not(.is-center):not(.is-right) {
-    right: 24px;
-  }
-
-  /* =========================
-    CTA 中身（サイズ・構造）
-  ========================= */
-
-  .cta-fixed__inner {
-    width: 360px;
-    /* 360〜420pxで調整可 */
-    margin: 0;
+  .cta-fixed__inner{
+    width: min(400px, 92vw);
     padding-top: 18px;
-    /* バッジ分の逃げ */
   }
 
   /* =========================
-    上部バッジ（PC微調整）
+    バッジ（PC微調整）
   ========================= */
-
-  .cta-fixed__badge {
-    left: 50%;
-    transform: translate(-50%, -20%);
+  .cta-fixed__badge{
     font-size: 15px;
-    padding: 6px 44px;
+    padding: 6px 54px;
   }
 
   /* =========================
-    CTAボタン本体
+    ボタン（PC微調整）
   ========================= */
-
-  .cta-fixed__btn {
+  .cta-fixed__btn{
     border-radius: 16px;
     padding: 18px 18px 12px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+    box-shadow: 0 10px 24px rgba(0,0,0,.18);
   }
 
-  .cta-fixed__icon {
+  .cta-fixed__icon{
     width: 20px;
     height: 20px;
   }
 
-  .cta-fixed__main {
+  .cta-fixed__main{
     font-size: 20px;
     transform: translateY(-2px);
   }
 
-  .cta-fixed__sub {
+  .cta-fixed__sub{
     margin-top: 6px;
     font-size: 13px;
     gap: 12px;
   }
 
-  /* =========================
-    Hover（PCのみ・任意）
-  ========================= */
-
-  .cta-fixed__btn:hover {
+  /* Hover（任意） */
+  .cta-fixed__btn:hover{
     transform: translateY(-1px);
   }
 }
